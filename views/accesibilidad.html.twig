@@ -1,0 +1,76 @@
+{% extends "layout.html.twig" %}
+{% set active = 'accesibilidad' %}
+{% set title = 'Accessibility'|trans %}
+
+{% block content %}
+    <div class="container">
+        <h1>Accesibilidad.</h1>
+
+        <p>
+        Para cumplir con los criterios de usabilidad y accesibilidad hemos basado el diseño en HTML5 y CSS3, porque entendemos que dichos criterios deben tener una base sólida que cumpla con los estándares más actuales.
+        </p>
+
+        <p>Seguidamente hemos aplicado un diseño responsivo para que nuestra web pueda verse en los distintos dispositivos, incluyendo tabletas y móviles, y hemos separado los elementos formales de los contenidos. También hemos tenido en cuenta los valores semánticos de cada etiqueta.</p>
+
+        <p>Hemos construído un menú con accesos de teclado -que se especifica en el atributo "title" de cada enlace- para que las personas con discapacidad motriz puedan moverse con la mayor comodidad por nuestra web. A continuación, y a modo de mapa web, detallamos los enlaces del menú:</p>
+
+
+        <p>
+        Puede encontrar m&aacute;s informaci&oacute;n sobre las teclas de acceso en <a href="http://www.w3.org/TR/WAI-WEBCONTENT/" title="Definición de los criterios de usabilidad y accesibilidad. Enlace externo.">Directrices de Accesibilidad</a> del <a href="http://www.w3.org/"><acronym title="World Wide Web Consortium">W3C</acronym></a>.
+
+        </p>
+
+        <ul class="list-unstyled">
+            <li>[1] - Página de Inicio</li>
+            <li>[2] - Nuez. Página de ejemplo.</li>
+            <li>[3] - Pistacho. Otra página de ejemplo.</li>
+            <li>[4] - Acerca de. Más información sobre Cáscara.</li>
+            <li>[5] - Créditos. Quiénes desarrollan Cáscara.</li>
+            <li>[6] - Contactar. Datos de contacto</li>
+            <li>[0] - Aplicaci&oacute;n de los criterios de usabilidad y accesibilidad en este sitio web</li>
+        </ul>
+
+        <h2>
+        Utilizaci&oacute;n de las teclas de acceso en distintos navegadores web
+        </h2>
+
+        <dl>
+
+            <dt>Internet Explorer 5+ (Windows)</dt>
+            <dd>Mantenga pulsada la tecla Alt , presione el n&uacute;mero o letra de la tecla de acceso, y suelte ambas teclas y pulse ENTER.
+            </dd>
+            
+            <dt>Firefox, Mozilla y Netscape 7+ (Windows)</dt>
+            <dd>Mantenga pulsada la tecla Alt y presione el n&uacute;mero o letra de la tecla de acceso.</dd>
+
+            
+            <dt>Firefox, Mozilla y Netscape 7+ (Mac OS X)</dt>
+            <dd>Mantenga pulsada la tecla Ctrl y presione el n&uacute;mero o letra de la tecla de acceso.</dd>
+            
+            <dt>Safari y Omniweb (Mac OS X)</dt>
+            <dd>Mantenga pulsada la tecla Ctrl  y presione el n&uacute;mero o letra de la tecla de acceso.</dd>
+            
+
+            
+            <dt>Konqueror (Linux):</dt>
+
+             <dd>Pulse y suelte la tecla Ctrl , y despu&Eacute;acute;s presione el n&uacute;mero o letra de la tecla de acceso.</dd>
+            
+
+            <dt>Internet Explorer 4 (Windows)</dt>
+            <dd>Mantenga pulsada la tecla Alt  y presione el n&uacute;mero o letra de la tecla de acceso.</dd>
+            
+            <dt>Internet Explorer 5+ (Mac)</dt>
+            <dd>Mantenga pulsada la tecla Ctrl  y presione el n&uacute;mero o letra de la tecla de acceso.</dd>
+
+            
+            <dt>Internet Explorer 4.5 (Mac)</dt>
+            <dd>Las teclas de acceso no est&aacute;n soportadas, por favor utilice otro navegador.</dd>
+            
+            <dt>Netscape 6 y anteriores (Todas las plataformas)
+            <dd>Las teclas de acceso no est&aacute;n soportadas, por favor utilice otro navegador.</dd>
+
+        </dl>
+    </div>
+
+{% endblock %}

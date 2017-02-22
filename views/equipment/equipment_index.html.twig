@@ -1,0 +1,71 @@
+{% extends "layout_adminLTE.html.twig" %}
+{% set active = 'equipment' %}
+{% set title = 'Equipment'|trans %}
+
+{% block css %}
+    {{ parent() }}
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+{# Para probar y luego borrar #}
+{% set aulas = [{'entity': 'Facultad de Derecho', 'area': 'Planta semisótano', 'room_id': '1', 'room_name': 'Aula 00.1', 'capacity': '', 'status': 'Operativa'}, {'entity': 'Facultad de Derecho', 'area': 'Planta semisótano', 'room_id': '2', 'room_name': 'Aula 00.2', 'capacity': '', 'status': 'Operativa'}] %}
+
+  <h2 class="sub-header">{{ title }}</h2>
+  {% if aulas is defined %}
+  <div class="table-responsive">
+		<table class="table table-striped">
+		  <thead>
+			<tr>
+			  <th>Facultad</th>
+			  <th>Planta</th>
+			  <th>Aula</th>
+			  <th>Capacidad</th>
+			  <th>Estado</th>
+			</tr>
+		  </thead>
+
+		  <tbody>
+		  	{% for aula in aulas %}
+		  		<tr>
+		  			<td>{{ aula.entity }}</td>
+		  			<td>{{ aula.area }}</td>
+		  			<td><a href="{{ path('room_view') }}/{{ aula.room_id }}" title="Historial del {{ aula.room_name }} - {{ aula.room_id }}">{{ aula.room_name }}</a></td>
+		  			<td>{{ aula.capacity }}</td>
+		  			<td><i class="fa fa-check" aria-hidden="true"></i> {{ aula.status }}</td>
+	  			</tr>
+		  	{% endfor %}
+			{#foreach $incidencias as $incidencia}
+			{if $incidencia->usuario_id eq $usuario_id}
+			<tr>
+			  <td><a href="index.php?page=aula_detalle&aula={$incidencia->room->id}" title="Ver historial del aula.">{$incidencia->room->room_name}</a></td>
+			  <td>{$incidencia->incidencia}<p><a href="index.php?page=incidencia_detalles&incidencia={$incidencia->idencriptado}" title="Ver detalles de la incidencia '{$incidencia->idencriptado}'.">Más detalles...</a></p></td>
+			  <td>{$incidencia->f_notificacion|date_format:"%d/%m/%Y"}</td>
+			  <td><a href="index.php?page=incidencia_usuario&user={$incidencia->usuario_id}" title="Ver incidencias de {$incidencia->usuario->nombre} {$incidencia->usuario->apellidos}.">{$incidencia->usuario->nombre} {$incidencia->usuario->apellidos}</a></td>
+			  <td>{*<a href="index.php?page=categoría_detalles&categoria={$incidencia->idencriptado}" title="Ver incidencias de la categoría '{$incidencia->categoria->nombre}'.">*}{$incidencia->categoria->nombre}{*</a>*}</td>
+				<td>
+				{if $incidencia->estado_id == 1}
+					{*$incidencia->estado_id*}<i class="fa fa-wrench" aria-hidden="true"></i> Pendiente.
+				{elseif $incidencia->estado_id == 2}
+					<i class="fa fa-close" aria-hidden="true"></i> Inoperativo.
+				{elseif $incidencia->estado_id == 3}
+					<i class="fa fa-wrench" aria-hidden="true"></i> En proceso.
+				{else}
+					<i class="fa fa-check" aria-hidden="true"></i> Resuelto el {$incidencia->f_resolucion|date_format:"%d/%m/%Y"}.
+				{/if}
+				</td>
+			</tr>
+			{/if}
+			{/foreach#}
+		  </tbody>
+		</table>
+	</div>
+	{% else %}
+		No hay aulas que mostrar.
+	{% endif %}
+        
+{% endblock %}

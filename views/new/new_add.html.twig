@@ -1,0 +1,52 @@
+{% extends "layout_adminLTE.html.twig" %}
+{% set active = 'news_add' %}
+{% set title = 'Add New'|trans %}
+
+{# Para probar y luego borrar #}
+{% set categoryNews = [{'id': 1, 'name': 'Aulas'}, {'id': 2, 'name': 'Eventos'}] %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>{{ title }}</h2>
+
+            <form action="{#{ path('person_save') }#}" method="post"  enctype='multipart/form-data'>
+                <div class="form-group">
+                    <label for="category">{{ 'Category'|trans }}</label>
+                    <div class="controls">
+					<select id="category" name="category"  class="form-control placeholder" required>
+						<option value="" name="category">Seleccione una categoria. <i class="fa fa-sort"></i></option>
+					{% for category in categoryNews %}
+						<option value="{{ category.id }}" name="category">{{ category.name }}</option>
+					{% endfor %}
+					</select>
+			  </div>
+                </div>
+                <div class="form-group">
+                    <label for="title">{{ 'Title'|trans }}</label>
+                    <input type="text" class="form-control" name="title">
+                </div>
+                <div class="form-group">
+                    <label for="subtitle">{{ 'Subtitle'|trans }}</label>
+                    <input type="text" class="form-control" name="subtitle">
+                </div>
+                <!--div class="form-group">
+                    <label for="email">{{ 'Email'|trans }}</label>
+                    <input type="text" class="form-control" name="email">
+                </div-->
+
+                <!-- Textarea -->
+				<div class="form-group">
+				  <label class="control-label" for="desarrollo">Cuerpo de la noticia:</label>
+				  <div class="controls">                     
+					<textarea id="desarrollo" name="desarrollo" class="form-control" required  placeholder="Escriba aquí el desarrollo de la noticia."></textarea>
+				  </div>
+				</div>
+				
+                <button type="submit" class="btn btn-primary">{{ 'Save'|trans }}</button>
+                <button type="reset" class="btn btn-danger">{{ 'Cancel'|trans }}</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

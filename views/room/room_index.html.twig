@@ -1,0 +1,53 @@
+{% extends "layout_adminLTE.html.twig" %}
+{% set active = 'rooms' %}
+{% set title = 'Rooms'|trans %}
+
+{% block css %}
+    {{ parent() }}
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+  <h2 class="sub-header">{{ title }}</h2>
+  {% if rooms is defined %}
+  <div class="table-responsive">
+		<table class="table table-striped">
+		  <thead>
+			<tr>
+			  <th>Facultad</th>
+			  <th>Planta</th>
+			  <th>Aula</th>
+			  <th>Capacidad</th>
+			  <th>Estado</th>
+			</tr>
+		  </thead>
+
+		  <tbody>
+
+		  	{% for room in rooms %}
+		  		<tr>
+		  			<td>{{ room.id }}</td>
+		  			<td>{{ room.area_id }}</td>
+		  			<td><a href="{{ path('room_view') }}/{{ room.id }}" title="Historial del {{ room.room_name }} - {{ room.id }}">{{ room.room_name }}</a></td>
+		  			<td>{{ room.capacity }}</td>
+		  			<td><i class="fa {% if room.disabled == 0 %}
+		  				fa-check-circle text-green
+		  			{% else %}
+		  				fa-close text-red
+		  			{% endif %}" aria-hidden="true"></i></td>
+	  			</tr>
+		  	{% endfor %}
+
+		  </tbody>
+		</table>
+		{% include "pagination.html.twig" %}
+	</div>
+	{% else %}
+		No hay aulas que mostrar.
+	{% endif %}
+        
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "layout_adminLTE.html.twig" %}
+{% set active = 'room_prepare' %}
+{% set title = 'Rooms Prepare'|trans %}
+
+{% block css %}
+    {{ parent() }}
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+{# Para probar y luego borrar #}
+{% set aulas = [{'entity': 'Facultad de Derecho', 'area': 'Planta semisótano', 'room_id': '1', 'room_name': 'Aula 00.1', 'capacity': '', 'status': 'Operativa'}, {'entity': 'Facultad de Derecho', 'area': 'Planta semisótano', 'room_id': '2', 'room_name': 'Aula 00.2', 'capacity': '', 'status': 'Operativa'}] %}
+
+{% include "paraborrar.twig" %}
+
+  <h2 class="sub-header">{{ title }}</h2>
+  {% if aulas is defined %}
+  	<div class="row">
+		{% for aula in aulas %}
+		<form action="index.php?page=aula_preparar_grabar" method="post">
+			<div class="col-sm-3 col-md-2">
+			<button class="btn {$projector->statusBoton} btn-success btn-block proj" id="{$projector->id}" name="formEnviado" id="formEnviado">{{aula.room_name}}</button>
+			</div>
+		</form>
+		{% endfor %}
+	</div>
+{% else %}
+	No hay aulas que mostrar.
+{% endif %}
+
+<div class="row">
+	<div class="col-sm-3 .col-sm-offset-6 col-md-2 col-md-offset-4">
+	<button class="btn btn-success btn-block proj" type="submit">Encender todos</button>
+	</div>
+	<div class="col-sm-3 col-md-2">
+	<button class="btn btn-danger btn-block proj" type="submit">Apagar todos</button>
+	</div>
+</div>
+        
+{% endblock %}

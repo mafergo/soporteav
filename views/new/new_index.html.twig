@@ -1,0 +1,44 @@
+{% extends "layout_adminLTE.html.twig" %}
+{% set active = 'news' %}
+{% set title = 'News'|trans %}
+
+{% block css %}
+    {{ parent() }}
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+
+{# Para probar y luego borrar #}
+{% set news = [{'title': 'Título de la noticia', 'subtitle': 'Subtítulo', 'f_notificacion': '2015-01-16'}, {'title': 'Título de la noticia', 'subtitle': 'Subtítulo', 'f_notificacion': '2015-01-21'}] %}
+
+  <h2 class="sub-header">{{ 'News'|trans  }}</h2>
+  <div class="table-responsive">
+		
+	<table class="table table-striped">
+	  <thead>
+	    <tr>
+	      <th>Título</th>
+	      <th>Subtítulo</th>
+	      <th>Fecha</th>
+	    </tr>
+	  </thead>
+
+	  <tbody>
+	    {% for new in news %}
+	    <tr>
+	      <td>{{ new.title }}</td>
+	      <td>{{ new.subtitle }}</td>
+	      <td>{{ new.f_notificacion }}</td>
+	    </tr>
+	    {% endfor %}
+	  </tbody>
+	</table>
+
+	</div>
+        
+{% endblock %}

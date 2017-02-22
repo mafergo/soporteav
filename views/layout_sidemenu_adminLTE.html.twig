@@ -1,0 +1,121 @@
+{# Agrupamos las páginas activas por categorías #}
+{% set centers_actives = ['centers', 'centers_add'] %}
+{% set incidents_actives = ['incidents', 'incidents_add'] %}
+{% set rooms_actives = ['rooms', 'room_prepare', 'room_revise'] %}
+{% set news_actives = ['news', 'news_add'] %}
+{% set equipment_actives = ['pcs', 'projectors', 'microphones', 'equipment'] %}
+{% set users_actives = ['people', 'people_add'] %}
+
+<section class="sidebar">
+
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel">
+        <div class="pull-left image">
+          <!--img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"-->
+          <img src="dist/img/mariof.jpg" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p>Mario Fernández</p>
+          <!-- Status -->
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+      </div>
+
+      <!-- search form (Optional) -->
+      <!--form action="#" method="get" class="sidebar-form">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control" placeholder="Search...">
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+        </div>
+      </form-->
+      <!-- /.search form -->
+
+      <!-- Sidebar Menu -->
+      <ul class="sidebar-menu">
+        <li class="header">Admin</li>
+        <!-- Optionally, you can add icons to the links -->
+        <li ><a href="admin"><i class="fa fa-cog"></i> <span>Intranet</span></a></li>
+        <li class="{% if active in incidents_actives %}active {% endif %}treeview">
+          <a href="#"><i class="fa fa-fire-extinguisher" aria-hidden="true"></i> <span>Incidencias</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li{% if 'issues' == active %} class="active"{% endif %}><a href="{{ path('issues') }}">Listar incidencias.</a></li>
+            <li{% if 'issue_add' == active %} class="active"{% endif %}><a href="{{ path('issue_add') }}">Comunicar incidencia.</a></li>
+            <li{#% if 'rooms' == active %} class="active"{% endif %#}><a href="{{ path('rooms') }}">Comprobar el estado.</a></li>
+
+            <!--li><a href="#">Listar incidencias</a></li>
+            <li><a href="#">Comunicar incidencia</a></li>
+            <li><a href="#">Comprobar estado de las aulas</a></li-->
+          </ul>
+        </li>
+        <li class="{% if active in rooms_actives %}active {% endif %}treeview">
+          <a href="#"><i class="fa fa-graduation-cap" aria-hidden="true"></i> <span>Aulas</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li{% if 'rooms' == active %} class="active"{% endif %}><a href="{{ path('rooms') }}">Listar aulas.</a></li>
+            <li{% if 'room_prepare' == active %} class="active"{% endif %}><a href="{{ path('room_prepare') }}">Preparar aulas.</a></li>
+            <li{% if 'room_revise' == active %} class="active"{% endif %}><a href="{{ path('room_revise') }}">Revisar aulas.</a></li>
+          </ul>
+        </li>
+
+        <li class="{% if active in centers_actives %}active {% endif %}treeview">
+          <a href="#"><i class="fa fa-university" aria-hidden="true"></i> <span>Centros</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li{% if 'centers' == active %} class="active"{% endif %}><a href="{{ path('centers') }}">Listar Centros.</a></li>
+            <li{% if 'centers_add' == active %} class="active"{% endif %}><a href="{{ path('centers') }}">Añadir Centro.</a></li>
+          </ul>
+        </li>
+
+        <li class="{% if active in news_actives %}active {% endif %}treeview">
+          <a href="#"><i class="fa fa-newspaper-o"></i> <span>Novedades</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li{% if 'news' == active %} class="active"{% endif %}><a href="{{ path('news') }}">{{ 'News'|trans }}.</a></li>
+            <li{% if 'news_add' == active %} class="active"{% endif %} ><a href="{{ path('news_add') }}">Nueva noticia.</a></li>
+          </ul>
+        </li>
+
+        <li class="{% if active in equipment_actives %}active {% endif %}treeview">
+          <a href="#"><i class="fa fa-th-list"></i> <span>Inventario</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li{% if 'pcs' == active %} class="active"{% endif %}><a href="{{ path('pcs') }}">Ordenadores.</a></li>
+            <li{% if 'projectors' == active %} class="active"{% endif %}><a href="{{ path('projectors') }}">Proyectores.</a></li>
+            <li{% if 'microphones' == active %} class="active"{% endif %}><a href="{{ path('microphones') }}">Micrófonos.</a></li>
+            <li{% if 'equipment' == active %} class="active"{% endif %}><a href="{{ path('equipment') }}">Equipamiento.</a></li>
+          </ul>
+        </li>
+
+        <li class="{% if active in users_actives %}active {% endif %}treeview">
+          <a href="#"><i class="fa fa-user"></i> <span>Usuarios</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li{% if 'people' == active %} class="active"{% endif %}><a href="{{ path('people') }}"> Listar usuarios.</a></li>
+            <li{% if 'people_add' == active %} class="active"{% endif %}><a href="{{ path('people_add') }}"> Nuevo usuario.</a></li>
+          </ul>
+        </li>
+      </ul>
+      <!-- /.sidebar-menu -->
+    </section>

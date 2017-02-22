@@ -1,0 +1,70 @@
+{% extends "layout_adminLTE.html.twig" %}
+{% set active = 'incident' %}
+{% set title = 'Incident Data Sheet'|trans %}
+
+{% block content %}
+    <div class="row" style="padding-top: 20px;">
+        <div class="col-lg-8">
+            <h2>
+                <div class="btn-group pull-right">
+                    <a href="{{ path('incidents') }}" class="btn btn-white"
+                       role="button"><i class="fa fa-list"></i> {{ 'Return to list'|trans }}</a> &nbsp;
+                    <a href="{{ path('person_edit', {'id': incident.id}) }}" class="btn btn-white"
+                       role="button"><i class="fa fa-pencil"></i> {{ 'Edit'|trans }}</a>
+                </div>
+                {{ 'Incident'|trans }} {{ incident.encryptedId }}</h2>
+        </div>
+    </div>
+    <div class="row" style="padding-top: 20px">
+        <div class="col-lg-12">
+
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#personal" aria-controls="personal" role="tab"
+                                                          data-toggle="tab">{{ 'Personal Data'|trans }}</a></li>
+                <li role="presentation"><a href="#contact" aria-controls="contact" role="tab"
+                                           data-toggle="tab">{{ 'Contact Data'|trans }}</a></li>
+                <li role="presentation"><a href="#birth" aria-controls="birth" role="tab"
+                                           data-toggle="tab">{{ 'Birth Data'|trans }}</a></li>
+                <li role="presentation"><a href="#others" aria-controls="others" role="tab"
+                                           data-toggle="tab">{{ 'Others'|trans }}</a></li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active col-lg-6" id="personal" style="padding-top: 20px">
+                    <dl class="dl-horizontal">
+                        <dt>{{ 'Room'|trans }}:</dt>
+                        <dd>{{ incident.room_id }} {{ incident.encryptedId }}</dd>
+
+                        <dt>{{ 'User'|trans }}:</dt>
+                        <dd>{{ incident.user_id }}</dd>
+
+                        <dt>{{ 'Notification date'|trans }}:</dt>
+                        <dd>{{ incident.dateNotification|date('d/m/Y') }}</dd>
+
+                        <dt>{{ 'Description'|trans }}:</dt>
+                        <dd>{{ incident.description }}</dd>
+
+                    </dl>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="contact" style="padding-top: 20px">
+                    <dl class="dl-horizontal">
+                        <dt>{{ 'Email'|trans }}:</dt>
+                        <dd>{{ incident.id }}</dd>
+                    </dl>
+                </div>
+                <div role="tabpanel" class="tab-pane col-lg-6" id="birth" style="padding-top: 20px">
+                    <dl class="dl-horizontal">
+                        <dt>{{ 'Date of purchase'|trans }}:</dt>
+                        <dd>{{ incident.dateNotification|date('d/m/Y') }}</dd>
+                    </dl>
+                </div>
+                <div role="tabpanel" class="tab-pane col-lg-6" id="others" style="padding-top: 20px">
+                    <dl class="dl-horizontal">
+                        <dt>{{ 'State'|trans }}:</dt>
+                        <dd>{{ incident.state_id }}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

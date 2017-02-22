@@ -1,0 +1,61 @@
+{% extends "layout_adminLTE.html.twig" %}
+{% set active = 'pcs' %}
+{% set title = 'Computers'|trans %}
+
+{% block css %}
+    {{ parent() }}
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+  <h2 class="sub-header">{{ title }}</h2>
+  {% if pcs is defined %}
+  <div class="table-responsive">
+		<table class="table table-striped">
+		  <thead>
+			<tr>
+			  <th>ID</th>
+			  <th>Aula</th>
+			  <th>AulaID</th>
+			  <th>Marca</th>
+			  <th>Modelo</th>
+			  <th>Num serie</th>
+			  <th>Referencia</th>
+			  <th>Inventario</th>
+			  <th>Roseta</th>
+			  <th>IP</th>
+			  <th>Ethernet</th>
+			  <th>Fecha de compra</th>
+			</tr>
+		  </thead>
+
+		  <tbody>
+		  	{% for pc in pcs %}
+		  		<tr>
+		  			<td>{{ pc.id }}</td>
+		  			<td>{{ pc.room }}</td>
+		  			<td><a href="{{ path('room_view') }}/{{ pc.room_id }}" title="Historial del {{ pc.room }} - {{ pc.room_id }}">{{ pc.room_id }}</a></td>
+		  			<td>{{ pc.brand }}</td>
+		  			<td>{{ pc.model }}</td>
+		  			<td>{{ pc.serialNum }}</td>
+		  			<td>{{ pc.ref }}</td>
+		  			<td>{{ pc.inventory }}</td>
+		  			<td>{{ pc.roseta }}</td>
+		  			<td>{{ pc.ip }}</td>
+		  			<td>{{ pc.ethernet }}</td>
+		  			<td>{{ pc.datePurchase|date("d/m/Y") }}</td>
+	  			</tr>
+		  	{% endfor %}
+		  </tbody>
+		</table>
+		{% include "pagination.html.twig" %}
+	</div>
+	{% else %}
+		No hay ordenadores que mostrar.
+	{% endif %}
+        
+{% endblock %}

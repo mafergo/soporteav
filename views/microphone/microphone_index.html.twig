@@ -1,0 +1,61 @@
+{% extends "layout_adminLTE.html.twig" %}
+{% set active = 'microphones' %}
+{% set title = 'Microphones'|trans %}
+
+{% block css %}
+    {{ parent() }}
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+  <h2 class="sub-header">{{ title }}</h2>
+  {% if microphones is defined %}
+  <div class="table-responsive">
+		<table class="table table-striped">
+		  <thead>
+			<tr>
+			  <th>ID</th>
+			  <th>Aula</th>
+			  <th>AulaID</th>
+			  <th>Marca</th>
+			  <th>Modelo</th>
+			  <th>Num serie</th>
+			  <th>Referencia</th>
+			  <th>Inventario</th>
+			  <th>Roseta</th>
+			  <th>IP</th>
+			  <th>Ethernet</th>
+			  <th>Fecha de compra</th>
+			</tr>
+		  </thead>
+
+		  <tbody>
+		  	{% for microphone in microphones %}
+		  		<tr>
+		  			<td>{{ microphone.id }}</td>
+		  			<td>{{ microphone.room }}</td>
+		  			<td><a href="{{ path('room_view') }}/{{ microphone.room_id }}" title="Historial del {{ microphone.room }} - {{ microphone.room_id }}">{{ microphone.room_id }}</a></td>
+		  			<td>{{ microphone.brand }}</td>
+		  			<td>{{ microphone.model }}</td>
+		  			<td>{{ microphone.serialNum }}</td>
+		  			<td>{{ microphone.ref }}</td>
+		  			<td>{{ microphone.inventory }}</td>
+		  			<td>{{ microphone.roseta }}</td>
+		  			<td>{{ microphone.ip }}</td>
+		  			<td>{{ microphone.ethernet }}</td>
+		  			<td>{{ microphone.datePurchase|date("d/m/Y") }}</td>
+	  			</tr>
+		  	{% endfor %}
+		  </tbody>
+		</table>
+		{% include "pagination.html.twig" %}
+	</div>
+	{% else %}
+		No hay icrófonos que mostrar.
+	{% endif %}
+        
+{% endblock %}

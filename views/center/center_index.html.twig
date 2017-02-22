@@ -1,0 +1,44 @@
+{% extends "layout_adminLTE.html.twig" %}
+{% set active = 'centers' %}
+{% set title = 'Centers'|trans %}
+
+{% block css %}
+    {{ parent() }}
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+
+{# Para probar y luego borrar #}
+{# set centers = [{'name': 'Facultad de Derecho', 'id': '1'}, {'name': 'Facultad de Ciencias del Trabajo', 'id': '2'}] %#}
+
+  <h2 class="sub-header">{{ 'News'|trans  }}</h2>
+  <div class="table-responsive">
+		
+	<table class="table table-striped">
+	  <thead>
+	    <tr>
+	      <th>ID</th>
+	      <th>Nombre</th>
+	      <th>Descripción</th>
+	    </tr>
+	  </thead>
+
+	  <tbody>
+	    {% for center in centers %}
+	    <tr>
+	      <td>{{ center.id }}</td>
+	      <td>{{ center.name }}</td>
+	      <td>{{ center.description }}</td>
+	    </tr>
+	    {% endfor %}
+	  </tbody>
+	</table>
+
+	</div>
+        
+{% endblock %}
