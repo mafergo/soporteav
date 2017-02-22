@@ -1,0 +1,111 @@
+# locales/es.yml
+
+
+# ACTION
+
+Add: Añadir
+Add Category: Añadir categoría
+Add Center: Añadir Centro
+Add Incident: Comunicar Incidencia
+Add New: Añadir Noticia
+Add Person: Añadir Persona
+Add Room: Añadir Aula
+Cancel: Cancelar
+Delete: Borrar
+Delete Person: Borrar Persona
+Edit: Editar
+Edit Person: Editar Persona
+New: Nuevo
+New Person: Nueva Persona
+Next: Siguiente
+Previous: Previo
+Return to list: Volver al listado
+Save: Grabar
+Search: Buscar
+Toggle navigation: Conmutar navegación
+
+
+# FIELDS NAMES
+
+Birth Date: Fecha de nacimiento
+Center: Centro
+Comments: Comentarios
+Created at: Creado el
+Description: Descripción
+Email: Correo
+End Date: Fecha Baja
+First Name: Nombre
+Gender: Sexo
+ID: ID
+Last Name: Apellidos
+Locality: Localidad
+Name: Nombre
+Password: Contraseña
+People: Personas
+Person: Persona
+Province: Provincia
+Room: aula
+Start Date: Fecha Alta
+Title: Título
+Unit: Unidad
+Username: Nombre de Usuario
+Subtitle: Subtítulo
+
+
+#HELP
+
+Select gender: Seleccione sexo
+
+
+# TITLES & MENUS
+
+Accessibility: Accesibilidad
+Administration: Administración
+Admin: Administración
+Category: Categoría
+Computers: Ordenadores
+Configuration: Configuración
+Contact Data: Datos de Contacto
+Equipment: Equipamiento
+Home: Inicio
+Incident: Incidencia
+Incidents: Incidencias
+Inventory: Inventario
+Login: Entrar en el sistema
+Logout: Salir
+My profile: Mi Perfil
+Microphone: Micrófono
+Microphones: Micrófonos
+New Person: Nueva Persona
+News: Novedades
+Notification date: Fecha de notificación
+Others: Otros
+People: Personas
+People List: Lista de personas
+Person: Persona
+Person Data Sheet: Ficha Persona
+Person Edit: Editar Persona
+Personal Data: Datos Personales
+Photo Edit: Editar Fotografía
+Projector: Proyector
+Projectors: Proyectores
+Room: Aula
+Rooms: Aulas
+Rooms Prepare: Preparar Aulas
+Rooms Revise: Revisar Aulas
+
+
+# MESSAGES
+
+danger: ERROR
+No people defined yet: Todavía no hay personas
+Person data has been updated: Se han actualizado los datos de esta persona
+success: ÉXITO
+There is no record for this ID: No hay registro para esta ID
+Undefined: Indefinido
+warning: ATENCIÓN
+
+
+# VALIDATION
+
+name This value should not be blank. : El nombre no debe estar vacío.

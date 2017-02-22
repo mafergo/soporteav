@@ -1,0 +1,3 @@
+INSERT INTO `Person` (`id`, `birthDate`, `firstName`, `lastName`, `email`, `gender`, `startDate`, `endDate`) VALUES (NULL, '1968-05-06', 'Juan Antonio', 'Ruiz Rivas', 'juanan@us.es', 'male', '2016-05-09', NULL);
+INSERT INTO `Person` (`id`, `birthDate`, `firstName`, `lastName`, `email`, `gender`, `startDate`, `endDate`) VALUES (NULL, '1963-01-01', 'Juan Jesús', 'Martín Correderea', 'jjmc@us.es', 'male', '', NULL);
+INSERT INTO `Person` (`id`, `birthDate`, `firstName`, `lastName`, `email`, `gender`, `startDate`, `endDate`) VALUES (NULL, NULL, 'Victor Manuel', 'Vaquero Salas', 'vaquero@us.es', 'male', '2016-05-09', NULL);
