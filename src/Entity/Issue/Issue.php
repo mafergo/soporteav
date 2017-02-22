@@ -24,6 +24,11 @@ class Issue
      */
     private $encryptedId;
 
+    /**
+     * @ManyToOne(targetEntity="Room", inversedBy="issues")
+     * @var Room
+     */
+    private $room;
 
     /**
      * @Column(type="string")
