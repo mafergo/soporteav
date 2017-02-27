@@ -19,28 +19,10 @@ class Issue
     private $id;
 
     /**
-     * @Column(type="string")
-     * @var string
+     * @ManyToOne(targetEntity="Category", inversedBy="issues")
+     * @var Category
      */
-    private $encryptedId;
-
-    /**
-     * @ManyToOne(targetEntity="Room", inversedBy="issues")
-     * @var Room
-     */
-    private $room;
-
-    /**
-     * @Column(type="string")
-     * @var string
-     */
-    private $description;
-
-    /**
-     * @Column(type="integer")
-     * @var int
-     */
-    private $state_id;
+    private $category;
 
     /**
      * @Column(type="datetime")
@@ -55,10 +37,28 @@ class Issue
     private $dateResolution;
 
     /**
-     * @ManyToOne(targetEntity="Category", inversedBy="issues")
-     * @var Category
+     * @Column(type="string")
+     * @var string
      */
-    private $category;
+    private $description;
+
+    /**
+     * @Column(type="string")
+     * @var string
+     */
+    private $encryptedId;
+    
+    /**
+     * @ManyToOne(targetEntity="\US\Soporteav\Entity\Room", inversedBy="issues")
+     * @var Room
+     */
+    private $room;
+    
+    /**
+     * @Column(type="integer")
+     * @var int
+     */
+    private $state_id;
 
     /**
      * @Column(type="integer")
@@ -78,7 +78,7 @@ class Issue
         $this->dateNotification = $data['dateNotification'];
         $this->dateResolution = $data['dateResolution'];
         $this->estado = $data['estado_id'];
-        $this->category_id = $data['category_id'];
+        $this->category = $data['category'];
         $this->user_id = $data['user_id'];
     }
 
@@ -187,19 +187,19 @@ class Issue
     }
 
     /**
-     * @return int
+     * @return Category
      */
-    public function getCategory_id()
+    public function getCategory()
     {
-        return $this->category_id;
+        return $this->category;
     }
 
     /**
-     * @param int $category_id
+     * @param Category $category
      */
-    public function setCategory_id($category_id)
+    public function setCategory($category)
     {
-        $this->user_id = $category_id;
+        $this->category = $category;
     }
 
     /**

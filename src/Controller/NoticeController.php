@@ -2,27 +2,27 @@
 
 namespace US\Soporteav\Controller;
 
-use US\Soporteav\Entity\New;
-use US\Soporteav\Repository\NewRepository;
+use US\Soporteav\Entity\Notice;
+use US\Soporteav\Repository\NoticeRepository;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class NewController
+class NoticeController
 {
 
     /**
-     * @var newRepository
+     * @var noticeRepository
      */
-    protected $newRepository;
+    protected $noticeRepository;
 
     /**
-     * @param NewRepository $newRepository
+     * @param NoticeRepository $noticeRepository
      */
-    function __construct(NewRepository $newRepository)
+    function __construct(NoticeRepository $noticeRepository)
     {
-        $this->newRepository = $newRepository;
+        $this->noticeRepository = $noticeRepository;
     }
 
     /**
@@ -38,7 +38,7 @@ class NewController
         $orderBy = array();
         // Paginación
         $currentPage = $page;
-        $total = $this->newRepository->count();
+        $total = $this->noticeRepository->count();
         $numPages = ceil($total / $limit);
         if ($currentPage < 1) {
             $currentPage = 1;
@@ -47,12 +47,12 @@ class NewController
         }
         $offset = ($currentPage - 1) * $limit;
 
-        $news = $this->newRepository->findBy($criteria, $orderBy, $limit, $offset);
-        return $app['twig']->render('new/new_index.html.twig', array(
-            'news' => $news,
+        $notices = $this->noticeRepository->findBy($criteria, $orderBy, $limit, $offset);
+        return $app['twig']->render('notice/notice_index.html.twig', array(
+            'notices' => $notices,
             'currentPage' => $currentPage,
             'numPages' => $numPages,
-            'url' => $app['url_generator']->generate('news'),
+            'url' => $app['url_generator']->generate('notices'),
         ));
     }
 
@@ -64,10 +64,10 @@ class NewController
     public function viewAction(Application $app, $id)
     {
         /** @var Person $person */
-        $new = $this->newRepository->find($id);
-        if ($new) {
-             $response = $app['twig']->render('new/new_view.html.twig', array(
-                'new' => $new
+        $notice = $this->noticeRepository->find($id);
+        if ($notice) {
+             $response = $app['twig']->render('notice/notice_view.html.twig', array(
+                'notice' => $notice
             ));
         } else {
             $response = $this->redirectOnInvalidId($app, $id);
@@ -106,29 +106,29 @@ class NewController
 
         if ($data['id'] = $request->get('id')) {
             /** @var Person $person */
-            $new = $this->centerRepository->find($data['id']);
-            $new->setTitle($data['title']);
-            $new->setSubtitle($data['subtitle']);
-            $new->setContent($data['content']);
-            $new->setData($data['date']);
-            $new->setDataStart($data['date_start']);
-            $new->setDataEnd($data['date_end']);
-            $new->setCorrect($data['correct']);
-            $new->setAuthor($data['Author']);
-            $message = "New data has been updated"; // in case of success
-            $redirect = $app['url_generator']->generate('new_edit', $data); // in case of failure
+            $notice = $this->centerRepository->find($data['id']);
+            $notice->setTitle($data['title']);
+            $notice->setSubtitle($data['subtitle']);
+            $notice->setContent($data['content']);
+            $notice->setData($data['date']);
+            $notice->setDataStart($data['date_start']);
+            $notice->setDataEnd($data['date_end']);
+            $notice->setCorrect($data['correct']);
+            $notice->setAuthor($data['Author']);
+            $message = "Notice data has been updated"; // in case of success
+            $redirect = $app['url_generator']->generate('notice_edit', $data); // in case of failure
         } else {
-            $data['startDate'] = new \DateTime();
-            $new = new New($data);
+            $data['startDate'] = notice \DateTime();
+            $notice = new Notice($data);
             $message = "Center has been created"; // in case of success
-            $redirect = $app['url_generator']->generate('new_add'); // in case of failure
+            $redirect = $app['url_generator']->generate('notice_add'); // in case of failure
         }
-        $this->newRepository->save($new);
+        $this->noticeRepository->save($notice);
 
         // Valida los datos
         // http://silex.sensiolabs.org/doc/providers/validator.html
         /** @var array(ConstraintViolation) $errors */
-        $errors = $app['validator']->validate($new);
+        $errors = $app['validator']->validate($notice);
 
         // Check for failure or success
         if (count($errors) > 0) {
@@ -137,9 +137,9 @@ class NewController
                 $app['session']->getFlashBag()->add('danger', $message);
             }
         } else {
-            $this->newRepository->save($new);
+            $this->noticeRepository->save($notice);
             $app['session']->getFlashBag()->add('success', $message);
-            $redirect = $app['url_generator']->generate('new_view', array('id' => $new->getId()));
+            $redirect = $app['url_generator']->generate('notice_view', array('id' => $notice->getId()));
         }
 
         return $app->redirect($redirect);
@@ -152,21 +152,21 @@ class NewController
     public function addAction(Application $app)
     {
 
-        return $app['twig']->render('new/new_add.html.twig');
+        return $app['twig']->render('notice/notice_add.html.twig');
     }
 
     /**
      * @param Application $app
-     * @param $id New id
+     * @param $id Notice id
      * @return Response/ResponseRedirect
      */
     public function editAction(Application $app, $id)
     {
         /** @var Person $person */
-        $new = $this->newRepository->find($id);
-        if ($new) {
-            $response = $app['twig']->render('new/new_edit.html.twig', array(
-                'new' => $new));
+        $notice = $this->noticeRepository->find($id);
+        if ($notice) {
+            $response = $app['twig']->render('notice/notice_edit.html.twig', array(
+                'notice' => $notice));
         } else {
             $response = $this->redirectOnInvalidId($app, $id);
         }
@@ -182,9 +182,9 @@ class NewController
     public function deleteAction(Request $request, Application $app)
     {
         $id = $request->get('id');
-        /** @var New $new */
-        $new = $this->newRepository->find($id);
-        if ($new) {
+        /** @var Notice $notice */
+        $notice = $this->noticeRepository->find($id);
+        if ($notice) {
             $this->centerRepository->delete($center);
             $response = $app->redirect($app['url_generator']->generate('center'));
         } else {

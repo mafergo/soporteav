@@ -100,12 +100,12 @@ $app['repository.microphone'] = function ($app) {
 
 // Register controllers as Silex services
 $app['controller.notice'] = function ($app) {
-    return new NewController($app['repository.notice']);
+    return new NoticeController($app['repository.notice']);
 };
 
 // Register repositories as Silex services
 $app['repository.notice'] = function ($app) {
-    return new NewRepository($app['orm.em'], $app['orm.em']->getClassMetadata('US\Soporteav\Entity\Notice\Notice'));
+    return new NoticeRepository($app['orm.em'], $app['orm.em']->getClassMetadata('US\Soporteav\Entity\Notice'));
 };
 
 // Register controllers as Silex services

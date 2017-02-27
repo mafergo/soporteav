@@ -21,13 +21,13 @@ class Room
      * @Column(type="integer")
      * @var integer
      */
-    private $disabled;
+    private $area_id;
 
     /**
      * @Column(type="integer")
      * @var integer
      */
-    private $area_id;
+    private $disabled;
 
     /**
      * @Column(type="string")
@@ -54,7 +54,7 @@ class Room
     private $capacity;
     
     /**
-     * @OneToMany(targetEntity="Issue", mappedBy="room")
+     * @OneToMany(targetEntity="\US\Soporteav\Entity\Issue\Issue", mappedBy="room")
      * @var Issue[]
      */
     private $issues;
@@ -66,9 +66,9 @@ class Room
     function __construct($data)
     {
         $this->disabled = $data['disabled'];
-        $this->$area_id = $data['$area_id'];
-        $this->$room_name = $data['$room_name'];
-        $this->$sort_key = $data['$sort_key'];
+        $this->area_id = $data['$area_id'];
+        $this->room_name = $data['$room_name'];
+        $this->sort_key = $data['$sort_key'];
         $this->description = $data['description'];
         $this->capacity = $data['capacity'];
     }

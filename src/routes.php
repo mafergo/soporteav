@@ -39,8 +39,8 @@ $app->get('/novedades', function () use ($app) {
 })->bind('news');
 */
 $app->get('/noticia_nueva', function () use ($app) {
-    return $app['twig']->render('new/new_add.html.twig', array());
-})->bind('news_add');
+    return $app['twig']->render('notice/notice_add.html.twig', array());
+})->bind('notice_add');
 /*
 // Incidencias
 $app->get('/incidencias', function () use ($app) {
@@ -112,12 +112,12 @@ $app->get('/microfonos/{page}/{limit}', 'controller.microphone:indexAction')
     ->assert('limit', '\d+')
     ->bind('microphones');
 
-$app->get('/novedades/{page}/{limit}', 'controller.new:indexAction')
+$app->get('/novedades/{page}/{limit}', 'controller.notice:indexAction')
     ->value('page', '1')
     ->value('limit', '10')
     ->assert('page', '\d+')
     ->assert('limit', '\d+')
-    ->bind('news');
+    ->bind('notices');
 
 $app->get('/personas/{page}/{limit}', 'controller.person:indexAction')
     ->value('page', '1')

@@ -1,8 +1,8 @@
 {# Agrupamos las páginas activas por categorías #}
 {% set centers_actives = ['centers', 'centers_add'] %}
-{% set incidents_actives = ['incidents', 'incidents_add'] %}
+{% set issues_actives = ['issues', 'issue_add'] %}
 {% set rooms_actives = ['rooms', 'room_prepare', 'room_revise'] %}
-{% set news_actives = ['news', 'news_add'] %}
+{% set notices_actives = ['notices', 'notice_add'] %}
 {% set equipment_actives = ['pcs', 'projectors', 'microphones', 'equipment'] %}
 {% set users_actives = ['people', 'people_add'] %}
 
@@ -38,7 +38,7 @@
         <li class="header">Admin</li>
         <!-- Optionally, you can add icons to the links -->
         <li ><a href="admin"><i class="fa fa-cog"></i> <span>Intranet</span></a></li>
-        <li class="{% if active in incidents_actives %}active {% endif %}treeview">
+        <li class="{% if active in issues_actives %}active {% endif %}treeview">
           <a href="#"><i class="fa fa-fire-extinguisher" aria-hidden="true"></i> <span>Incidencias</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -79,15 +79,15 @@
           </ul>
         </li>
 
-        <li class="{% if active in news_actives %}active {% endif %}treeview">
+        <li class="{% if active in notices_actives %}active {% endif %}treeview">
           <a href="#"><i class="fa fa-newspaper-o"></i> <span>Novedades</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li{% if 'news' == active %} class="active"{% endif %}><a href="{{ path('news') }}">{{ 'News'|trans }}.</a></li>
-            <li{% if 'news_add' == active %} class="active"{% endif %} ><a href="{{ path('news_add') }}">Nueva noticia.</a></li>
+            <li{% if 'notices' == active %} class="active"{% endif %}><a href="{{ path('notices') }}">{{ 'Notices List'|trans }}.</a></li>
+            <li{% if 'notice_add' == active %} class="active"{% endif %} ><a href="{{ path('notice_add') }}">{{ 'Add Notice'|trans }}.</a></li>
           </ul>
         </li>
 

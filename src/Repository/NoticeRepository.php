@@ -1,23 +1,23 @@
 <?php
 /**
  * Soporteav Project
- * Repository/NewRepository.php
+ * Repository/NoticeRepository.php
  */
 
 namespace US\Soporteav\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use US\Soporteav\Entity\New;
+use US\Soporteav\Entity\Notice;
 
 
-class NewRepository extends EntityRepository
+class NoticeRepository extends EntityRepository
 {
     /**
      * @param array $criteria
      * @param array $orderBy
      * @param null $limit
      * @param null $offset
-     * @return array New
+     * @return array Notice
      */
     public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
     {
@@ -26,11 +26,11 @@ class NewRepository extends EntityRepository
 
     /**
      * Guarda una noticia en la base de datos
-     * @param New $new
+     * @param Notice $notice
      */
-    public function save(New $new)
+    public function save(Notice $notice)
     {
-        parent::getEntityManager()->persist($new);
+        parent::getEntityManager()->persist($notice);
         parent::getEntityManager()->flush();
     }
 
@@ -47,11 +47,11 @@ class NewRepository extends EntityRepository
 
 
     /**
-     * @param New $new
+     * @param Notice $notice
      */
-    public function delete(New $new)
+    public function delete(Notice $notice)
     {
-        parent::getEntityManager()->remove($new);
+        parent::getEntityManager()->remove($notice);
         parent::getEntityManager()->flush();
     }
 
@@ -62,7 +62,7 @@ class NewRepository extends EntityRepository
      */
     public function count()
     {
-        $dql = 'SELECT COUNT(c.id) FROM US\Soporteav\Entity\New c';
+        $dql = 'SELECT COUNT(n.id) FROM US\Soporteav\Entity\Notice n';
         $query = parent::getEntityManager()->createQuery($dql);
         return $query->getSingleScalarResult();
     }

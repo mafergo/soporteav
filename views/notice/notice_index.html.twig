@@ -1,6 +1,6 @@
 {% extends "layout_adminLTE.html.twig" %}
-{% set active = 'news' %}
-{% set title = 'News'|trans %}
+{% set active = 'notices' %}
+{% set title = 'Notices'|trans %}
 
 {% block css %}
     {{ parent() }}
@@ -12,11 +12,7 @@
 
 {% block content %}
 
-
-{# Para probar y luego borrar #}
-{% set news = [{'title': 'Título de la noticia', 'subtitle': 'Subtítulo', 'f_notificacion': '2015-01-16'}, {'title': 'Título de la noticia', 'subtitle': 'Subtítulo', 'f_notificacion': '2015-01-21'}] %}
-
-  <h2 class="sub-header">{{ 'News'|trans  }}</h2>
+  <h2 class="sub-header">{{ 'Notices'|trans  }}</h2>
   <div class="table-responsive">
 		
 	<table class="table table-striped">
@@ -29,16 +25,16 @@
 	  </thead>
 
 	  <tbody>
-	    {% for new in news %}
+	    {% for new in notices %}
 	    <tr>
 	      <td>{{ new.title }}</td>
 	      <td>{{ new.subtitle }}</td>
-	      <td>{{ new.f_notificacion }}</td>
+	      <td>{{ new.date|date("d/m/Y") }}</td>
 	    </tr>
 	    {% endfor %}
 	  </tbody>
 	</table>
-
-	</div>
+	  {% include "pagination.html.twig" %}
+  </div>
         
 {% endblock %}

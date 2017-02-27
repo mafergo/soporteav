@@ -18,7 +18,7 @@
 		<table class="table table-striped">
 		  <thead>
 			<tr>
-			  <th>{#{ knp_pagination_sortable('ID', issue.id) }#}ID</th>
+			  <th>ID</th>
 			  <th>ID encriptado</th>
 			  <th>Aula</th>
 			  <th>Incidencia</th>
@@ -39,7 +39,7 @@
 		  		<td><a href="{{ path('issue_view', {'id': issue.encryptedId}) }}" title="Detalles de la incidencia {{ issue.encryptedId }}">{{ issue.description }}</a></td>
 		  		<td>{{ issue.dateNotification|date("d/m/Y") }}</td>
 		  		<td><a href="{{ path('person_view', {'id': issue.user_id}) }}" title="Incidencias del usuario {{ issue.user_id }}">{{ issue.user_id }}</a></td>
-		  		<td><a href="{{ path('person_view', {'id': issue.user_id}) }}" title="Incidencias de la categoria {{ issue.category_id }}">{{ issue.category_id }}</a></td>
+		  		<td><a href="{{ path('person_view', {'id': issue.category.id}) }}" title="Incidencias de la categoria {{ issue.category.id }}">{{ issue.category.id }}</a></td>
 		  		<td>{% if issue.state_id == 4 %}
 		  			<i class="fa fa-check-circle text-green"></i> Resuelto el {{ issue.dateResolution|date("d/m/Y") }}
 	  			{% else %}

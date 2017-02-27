@@ -5,9 +5,9 @@ namespace US\Soporteav\Entity;
 
 /**
  * @Entity 
- * @table(name="tbl_new")
+ * @table(name="tbl_notice")
  **/
-class New
+class Notice
 {
     /**
      * @Id
@@ -28,6 +28,12 @@ class New
      * @var string
      */
     private $subtitle;
+
+    /**
+     * @Column(type="datetime")
+     * @var string
+     */
+    private $date;
     
 
     /**
@@ -78,5 +84,22 @@ class New
     {
         $this->subtitle = $subtitle;
     }
+
+    /**
+     * @return datetime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param datetime date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+
 
 }
