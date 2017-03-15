@@ -37,8 +37,8 @@
 		  	{% for pc in pcs %}
 		  		<tr>
 		  			<td>{{ pc.id }}</td>
-		  			<td>{{ pc.room }}</td>
-		  			<td><a href="{{ path('room_view') }}/{{ pc.room_id }}" title="Historial del {{ pc.room }} - {{ pc.room_id }}">{{ pc.room_id }}</a></td>
+		  			<td>{{ pc.room.room_name }}</td>
+		  			<td><a href="{{ path('room_view') }}/{{ pc.room_id }}" title="Historial del {{ pc.room.room_name }} - {{ pc.room_id }}">{{ pc.room.room_name }}</a></td>
 		  			<td>{{ pc.brand }}</td>
 		  			<td>{{ pc.model }}</td>
 		  			<td>{{ pc.serialNum }}</td>

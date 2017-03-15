@@ -37,8 +37,8 @@
 		  	{% for projector in projectors %}
 		  		<tr>
 		  			<td>{{ projector.id }}</td>
-		  			<td>{{ projector.room }}</td>
-		  			<td><a href="{{ path('room_view') }}/{{ projector.room_id }}" title="Historial del {{ projector.room }} - {{ projector.room_id }}">{{ projector.room_id }}</a></td>
+		  			<td>{{ projector.room.id }}</td>
+		  			<td><a href="{{ path('room_view') }}/{{ projector.room_id }}" title="Historial del {{ projector.room.id }} - {{ projector.room_id }}">{{ projector.room.room_name }}</a></td>
 		  			<td>{{ projector.brand }}</td>
 		  			<td>{{ projector.model }}</td>
 		  			<td>{{ projector.serialNum }}</td>

@@ -58,6 +58,39 @@ class Room
      * @var Issue[]
      */
     private $issues;
+
+    /**
+     * @OneToMany(targetEntity="\US\Soporteav\Entity\Projector", mappedBy="room")
+     * @var Projector[]
+     */
+    private $projectors;
+
+    /**
+     * @OneToMany(targetEntity="\US\Soporteav\Entity\Microphone", mappedBy="room")
+     * @var Microphone[]
+     */
+    private $microphones;
+
+    /**
+     * @OneToMany(targetEntity="\US\Soporteav\Entity\Pc", mappedBy="room")
+     * @var Pc[]
+     */
+    private $pcs;
+
+    /**
+     * @ManyToOne(targetEntity="\US\Soporteav\Entity\Area", inversedBy="rooms")
+     * @var Area
+     */
+    private $area;
+
+
+    /**
+     * @ManyToOne(targetEntity="\US\Soporteav\Entity\Center", inversedBy="rooms")
+     * @var Center
+     */
+    //private $center;
+
+
     
 
     /**
@@ -65,12 +98,23 @@ class Room
      */
     function __construct($data)
     {
+        $this->area = $data['area'];
+        //$this->center = $data['center'];
         $this->disabled = $data['disabled'];
         $this->area_id = $data['$area_id'];
         $this->room_name = $data['$room_name'];
         $this->sort_key = $data['$sort_key'];
         $this->description = $data['description'];
         $this->capacity = $data['capacity'];
+    }
+
+
+    /**
+     * @return area
+     */
+    public function getArea()
+    {
+        return $this->area;
     }
 
     /**
@@ -126,7 +170,7 @@ class Room
      */
     public function setRoom_name($room_name)
     {
-        $this->area_id = $room_name;
+        $this->$room_name = $room_name;
     }
 
     /**

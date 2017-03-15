@@ -37,8 +37,8 @@
 		  	{% for microphone in microphones %}
 		  		<tr>
 		  			<td>{{ microphone.id }}</td>
-		  			<td>{{ microphone.room }}</td>
-		  			<td><a href="{{ path('room_view') }}/{{ microphone.room_id }}" title="Historial del {{ microphone.room }} - {{ microphone.room_id }}">{{ microphone.room_id }}</a></td>
+		  			<td>{{ microphone.room.id }}</td>
+		  			<td><a href="{{ path('room_view') }}/{{ microphone.room_id }}" title="Historial del {{ microphone.room.room_name }} - {{ microphone.room_id }}">{{ microphone.room.room_name }}</a></td>
 		  			<td>{{ microphone.brand }}</td>
 		  			<td>{{ microphone.model }}</td>
 		  			<td>{{ microphone.serialNum }}</td>

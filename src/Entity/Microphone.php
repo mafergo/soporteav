@@ -18,8 +18,8 @@ class Microphone
     private $id;
 
     /**
-     * @Column(type="string")
-     * @var string
+     * @ManyToOne(targetEntity="\US\Soporteav\Entity\Room", inversedBy="microphones")
+     * @var Room
      */
     private $room;
 

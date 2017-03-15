@@ -18,8 +18,8 @@ class Projector
     private $id;
 
     /**
-     * @Column(type="string")
-     * @var string
+     * @ManyToOne(targetEntity="\US\Soporteav\Entity\Room", inversedBy="projectors")
+     * @var Room
      */
     private $room;
 

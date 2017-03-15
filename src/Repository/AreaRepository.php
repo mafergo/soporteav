@@ -1,26 +1,26 @@
 <?php
 /**
  * Soporteav Project
- * Repository/RoomRepository.php
+ * Repository/AreaRepository.php
  */
 
 namespace US\Soporteav\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use US\Soporteav\Entity\Room;
+use US\Soporteav\Entity\Area;
 
 
 /**
- * Class RoomRepository
+ * Class AreaRepository
  */
-class RoomRepository extends EntityRepository
+class AreaRepository extends EntityRepository
 {
     /**
      * @param array $criteria
      * @param array $orderBy
      * @param null $limit
      * @param null $offset
-     * @return array Room
+     * @return array Area
      */
     public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
     {
@@ -29,11 +29,11 @@ class RoomRepository extends EntityRepository
 
     /**
      * Guarda un Centro en la base de datos
-     * @param Room $room
+     * @param Area $area
      */
-    public function save(Room $room)
+    public function save(Area $area)
     {
-        parent::getEntityManager()->persist($room);
+        parent::getEntityManager()->persist($area);
         parent::getEntityManager()->flush();
     }
 
@@ -50,11 +50,11 @@ class RoomRepository extends EntityRepository
 
 
     /**
-     * @param Room $room
+     * @param Area $area
      */
-    public function delete(Room $room)
+    public function delete(Area $area)
     {
-        parent::getEntityManager()->remove($room);
+        parent::getEntityManager()->remove($area);
         parent::getEntityManager()->flush();
     }
 
@@ -65,7 +65,7 @@ class RoomRepository extends EntityRepository
      */
     public function count()
     {
-        $dql = 'SELECT COUNT(r.id) FROM US\Soporteav\Entity\Room r';
+        $dql = 'SELECT COUNT(a.id) FROM US\Soporteav\Entity\Area a';
         $query = parent::getEntityManager()->createQuery($dql);
         return $query->getSingleScalarResult();
     }

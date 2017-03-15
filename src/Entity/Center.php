@@ -28,6 +28,13 @@ class Center
      * @var string
      */
     private $description;
+
+
+    /**
+     * @OneToMany(targetEntity="\US\Soporteav\Entity\Room", mappedBy="center")
+     * @var Room[]
+     */
+    private $rooms;
     
 
     /**

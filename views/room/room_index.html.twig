@@ -18,7 +18,7 @@
 		<table class="table table-striped">
 		  <thead>
 			<tr>
-			  <th>Facultad</th>
+			  <th>Centro</th>
 			  <th>Planta</th>
 			  <th>Aula</th>
 			  <th>Capacidad</th>
@@ -31,7 +31,7 @@
 		  	{% for room in rooms %}
 		  		<tr>
 		  			<td>{{ room.id }}</td>
-		  			<td>{{ room.area_id }}</td>
+		  			<td>{{ room.area.area_name }}</td>
 		  			<td><a href="{{ path('room_view') }}/{{ room.id }}" title="Historial del {{ room.room_name }} - {{ room.id }}">{{ room.room_name }}</a></td>
 		  			<td>{{ room.capacity }}</td>
 		  			<td><i class="fa {% if room.disabled == 0 %}

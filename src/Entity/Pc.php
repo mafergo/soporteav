@@ -18,8 +18,8 @@ class Pc
     private $id;
 
     /**
-     * @Column(type="string")
-     * @var string
+     * @ManyToOne(targetEntity="\US\Soporteav\Entity\Room", inversedBy="pcs")
+     * @var Room
      */
     private $room;
 

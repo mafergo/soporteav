@@ -32,13 +32,13 @@
 	    {% for center in centers %}
 	    <tr>
 	      <td>{{ center.id }}</td>
-	      <td>{{ center.name }}</td>
+	      <td><a href=""> {{ center.name }}</a></td>
 	      <td>{{ center.description }}</td>
 	    </tr>
 	    {% endfor %}
 	  </tbody>
 	</table>
-
+      {% include "pagination.html.twig" %}
 	</div>
         
 {% endblock %}
