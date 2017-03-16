@@ -35,6 +35,10 @@ use US\Soporteav\Repository\ProjectorRepository;
 use US\Soporteav\Controller\RoomController;
 use US\Soporteav\Repository\RoomRepository;
 
+// Room
+use US\Soporteav\Controller\UnittechController;
+use US\Soporteav\Repository\UnittechRepository;
+
 use Silex\Application;
 use Silex\Provider\HttpFragmentServiceProvider;
 use Silex\Provider\RoutingServiceProvider;
@@ -166,6 +170,16 @@ $app['repository.room'] = function ($app) {
 // Register controllers as Silex services
 $app['controller.room'] = function ($app) {
     return new RoomController($app['repository.room']);
+};
+
+// Register controllers as Silex services
+$app['controller.unittech'] = function ($app) {
+    return new UnittechController($app['repository.unittech']);
+};
+
+// Register repositories as Silex services
+$app['repository.unittech'] = function ($app) {
+    return new UnittechRepository($app['orm.em'], $app['orm.em']->getClassMetadata('US\Soporteav\Entity\Unittech'));
 };
 
 

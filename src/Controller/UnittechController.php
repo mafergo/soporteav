@@ -2,27 +2,28 @@
 
 namespace US\Soporteav\Controller;
 
-use US\Soporteav\Entity\Notice;
-use US\Soporteav\Repository\NoticeRepository;
+use US\Soporteav\Entity\Unittech;
+use US\Soporteav\Repository\UnittechRepository;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class NoticeController
+class UnittechController
 {
 
     /**
-     * @var noticeRepository
+     * @var unittechRepository
      */
-    protected $noticeRepository;
+    #protected $unittechRepository;
+    protected $unittechRepository;
 
     /**
-     * @param NoticeRepository $noticeRepository
+     * @param UnittechRepository $unittechRepository
      */
-    function __construct(NoticeRepository $noticeRepository)
+    function __construct(UnittechRepository $unittechRepository)
     {
-        $this->noticeRepository = $noticeRepository;
+        $this->unittechRepository = $unittechRepository;
     }
 
     /**
@@ -38,7 +39,7 @@ class NoticeController
         $orderBy = array();
         // Paginación
         $currentPage = $page;
-        $total = $this->noticeRepository->count();
+        $total = $this->unittechRepository->count();
         $numPages = ceil($total / $limit);
         if ($currentPage < 1) {
             $currentPage = 1;
@@ -47,12 +48,12 @@ class NoticeController
         }
         $offset = ($currentPage - 1) * $limit;
 
-        $notices = $this->noticeRepository->findBy($criteria, $orderBy, $limit, $offset);
-        return $app['twig']->render('notice/notice_index.html.twig', array(
-            'notices' => $notices,
+        $unittechs = $this->unittechRepository->findBy($criteria, $orderBy, $limit, $offset);
+        return $app['twig']->render('unittech/unittech_index.html.twig', array(
+            'unittechs' => $unittechs,
             'currentPage' => $currentPage,
             'numPages' => $numPages,
-            'url' => $app['url_generator']->generate('notices'),
+            'url' => $app['url_generator']->generate('unittechs'),
         ));
     }
 
@@ -63,11 +64,11 @@ class NoticeController
      */
     public function viewAction(Application $app, $id)
     {
-        /** @var Person $person */
-        $notice = $this->noticeRepository->find($id);
-        if ($notice) {
-             $response = $app['twig']->render('notice/notice_view.html.twig', array(
-                'notice' => $notice
+        /** @var unittech $unittech */
+        $unittech = $this->unittechRepository->find($id);
+        if ($unittech) {
+             $response = $app['twig']->render('unittech/unittech_view.html.twig', array(
+                'unittech' => $unittech
             ));
         } else {
             $response = $this->redirectOnInvalidId($app, $id);
@@ -85,7 +86,7 @@ class NoticeController
     {
         $message = "There is no record for ID " . $id;
         $app['session']->getFlashBag()->add('danger', $message);
-        return $app->redirect($app['url_generator']->generate('people'));
+        return $app->redirect($app['url_generator']->generate('unittechs'));
     }
 
     /**
@@ -95,40 +96,28 @@ class NoticeController
      */
     public function saveAction(Request $request, Application $app)
     {
-        $data['title'] = $request->get('title');
-        $data['subtitle'] = $request->get('subtitle');
-        $data['content'] = $request->get('content');
-        $data['date'] = $request->get('date');
-        $data['date_start'] = $request->get('date _start');
-        $data['date_end'] = $request->get('date_end');
-        $data['correct'] = $request->get('correct');
-        $data['author'] = $request->get('author');
+        $data['name'] = $request->get('name');
+        $data['description'] = $request->get('description');
 
         if ($data['id'] = $request->get('id')) {
-            /** @var Person $person */
-            $notice = $this->centerRepository->find($data['id']);
-            $notice->setTitle($data['title']);
-            $notice->setSubtitle($data['subtitle']);
-            $notice->setContent($data['content']);
-            $notice->setData($data['date']);
-            $notice->setDataStart($data['date_start']);
-            $notice->setDataEnd($data['date_end']);
-            $notice->setCorrect($data['correct']);
-            $notice->setAuthor($data['Author']);
-            $message = "Notice data has been updated"; // in case of success
-            $redirect = $app['url_generator']->generate('notice_edit', $data); // in case of failure
+            /** @var Unittech $unittech */
+            $unittech = $this->unittechRepository->find($data['id']);
+            $unittech->setName($data['name']);
+            $unittech->setDescription($data['description']);
+            $message = "Unittech data has been updated"; // in case of success
+            $redirect = $app['url_generator']->generate('unittech_edit', $data); // in case of failure
         } else {
             $data['startDate'] = new \DateTime();
-            $notice = new Notice($data);
-            $message = "Center has been created"; // in case of success
-            $redirect = $app['url_generator']->generate('notice_add'); // in case of failure
+            $unittech = new Unittech($data);
+            $message = "Unittech has been created"; // in case of success
+            $redirect = $app['url_generator']->generate('unittech_add'); // in case of failure
         }
-        $this->noticeRepository->save($notice);
+        $this->unittechRepository->save($unittech);
 
         // Valida los datos
         // http://silex.sensiolabs.org/doc/providers/validator.html
         /** @var array(ConstraintViolation) $errors */
-        $errors = $app['validator']->validate($notice);
+        $errors = $app['validator']->validate($unittech);
 
         // Check for failure or success
         if (count($errors) > 0) {
@@ -137,9 +126,9 @@ class NoticeController
                 $app['session']->getFlashBag()->add('danger', $message);
             }
         } else {
-            $this->noticeRepository->save($notice);
+            $this->unittechRepository->save($unittech);
             $app['session']->getFlashBag()->add('success', $message);
-            $redirect = $app['url_generator']->generate('notice_view', array('id' => $notice->getId()));
+            $redirect = $app['url_generator']->generate('unittech_view', array('id' => $unittech->getId()));
         }
 
         return $app->redirect($redirect);
@@ -152,21 +141,21 @@ class NoticeController
     public function addAction(Application $app)
     {
 
-        return $app['twig']->render('notice/notice_add.html.twig');
+        return $app['twig']->render('unittech/unittech_add.html.twig');
     }
 
     /**
      * @param Application $app
-     * @param $id Notice id
+     * @param $id Unittech id
      * @return Response/ResponseRedirect
      */
     public function editAction(Application $app, $id)
     {
-        /** @var Person $person */
-        $notice = $this->noticeRepository->find($id);
-        if ($notice) {
-            $response = $app['twig']->render('notice/notice_edit.html.twig', array(
-                'notice' => $notice));
+        /** @var Penter $unittech */
+        $unittech = $this->unittechRepository->find($id);
+        if ($unittech) {
+            $response = $app['twig']->render('unittech/unittech_edit.html.twig', array(
+                'unittech' => $unittech));
         } else {
             $response = $this->redirectOnInvalidId($app, $id);
         }
@@ -182,11 +171,11 @@ class NoticeController
     public function deleteAction(Request $request, Application $app)
     {
         $id = $request->get('id');
-        /** @var Notice $notice */
-        $notice = $this->noticeRepository->find($id);
-        if ($notice) {
-            $this->noticeRepository->delete($notice);
-            $response = $app->redirect($app['url_generator']->generate('center'));
+        /** @var Unittech $unittech */
+        $unittech = $this->unittechRepository->find($id);
+        if ($unittech) {
+            $this->unittechRepository->delete($unittech);
+            $response = $app->redirect($app['url_generator']->generate('unittech'));
         } else {
             $response = $this->redirectOnInvalidId($app, $id);
         }

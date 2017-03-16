@@ -5,9 +5,9 @@ namespace US\Soporteav\Entity;
 
 /**
  * @Entity 
- * @table(name="tbl_center")
+ * @table(name="tbl_unittech")
  **/
-class Center
+class Unittech
 {
     /**
      * @Id
@@ -31,16 +31,10 @@ class Center
 
 
     /**
-     * @OneToMany(targetEntity="\US\Soporteav\Entity\Room", mappedBy="center")
-     * @var Room[]
+     * @OneToMany(targetEntity="\US\Soporteav\Entity\Center", mappedBy="unittech")
+     * @var Center[]
      */
-    private $rooms;
-
-    /**
-     * @ManyToOne(targetEntity="\US\Soporteav\Entity\Unittech", inversedBy="centers")
-     * @var Unittech
-     */
-    private $unittech;
+    private $centers;
     
 
     /**
@@ -50,8 +44,9 @@ class Center
     {
         $this->name = $data['name'];
         $this->description = $data['description'];
-        $this->unittech = $data['unittech'];
+        $this->center = $data['center'];
     }
+
 
 
     /**
@@ -71,12 +66,29 @@ class Center
     }
 
     /**
-     * @param string $name
+     * @param string name
      */
     public function setName($name)
     {
         $this->name = $name;
     }
+
+    /**
+     * @return Center[]
+     */
+    public function getCenters()
+    {
+        return $this->centers;
+    }
+
+    /**
+     * @param Center[] $centers
+     */
+    public function setCenters($centers)
+    {
+        $this->centers = $centers;
+    }
+
 
     /**
      * @return string
@@ -94,20 +106,5 @@ class Center
         $this->description = $description;
     }
 
-    /**
-     * @return Unittech
-     */
-    public function getUnittech()
-    {
-        return $this->unittech;
-    }
-
-    /**
-     * @param Unittech $unittech
-     */
-    public function setUnittech($unittech)
-    {
-        $this->unittech = $unittech;
-    }
 
 }

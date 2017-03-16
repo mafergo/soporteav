@@ -155,6 +155,13 @@ $app->get('/proyectores/{page}/{limit}', 'controller.projector:indexAction')
     ->assert('limit', '\d+')
     ->bind('projectors');
 
+$app->get('/unidades/{page}/{limit}', 'controller.unittech:indexAction')
+    ->value('page', '1')
+    ->value('limit', '10')
+    ->assert('page', '\d+')
+    ->assert('limit', '\d+')
+    ->bind('unittechs');
+
 $app->get('/private_upload/{item_id}/{path}', function ($item_id, $path) use ($app) {
     if (!file_exists('../var/private_upload/' . $item_id . '/' . $path)) {
         $app->abort(404);

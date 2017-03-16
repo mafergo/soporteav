@@ -35,10 +35,10 @@
 		  			<td><a href="{{ path('room_view') }}/{{ room.id }}" title="Historial del {{ room.room_name }} - {{ room.id }}">{{ room.room_name }}</a></td>
 		  			<td>{{ room.capacity }}</td>
 		  			<td><i class="fa {% if room.disabled == 0 %}
-		  				fa-check-circle text-green
+		  				fa-check-circle text-green" aria-hidden="true"></i> Operativa.
 		  			{% else %}
-		  				fa-close text-red
-		  			{% endif %}" aria-hidden="true"></i></td>
+		  				fa-close text-red" aria-hidden="true"></i> No disponible.
+		  			{% endif %}</td>
 	  			</tr>
 		  	{% endfor %}
 

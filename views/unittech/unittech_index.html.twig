@@ -1,6 +1,6 @@
 {% extends "layout_adminLTE.html.twig" %}
 {% set active = 'centers' %}
-{% set title = 'Centers'|trans %}
+{% set title = 'Units'|trans %}
 
 {% block css %}
     {{ parent() }}
@@ -16,28 +16,24 @@
 {# Para probar y luego borrar #}
 {# set centers = [{'name': 'Facultad de Derecho', 'id': '1'}, {'name': 'Facultad de Ciencias del Trabajo', 'id': '2'}] %#}
 
-  <h2 class="sub-header">{{ 'Centers'|trans  }}</h2>
+  <h2 class="sub-header">{{ 'Units'|trans  }}</h2>
   <div class="table-responsive">
 		
 	<table class="table table-striped">
 	  <thead>
 	    <tr>
 	      <th>ID</th>
-		  <th>Unidad</th>
 	      <th>Nombre</th>
 	      <th>Descripción</th>
 	    </tr>
 	  </thead>
 
 	  <tbody>
-	    {% for center in centers %}
+	    {% for unittech in unittechs %}
 	    <tr>
-			<td>{{ center.id }}</td>
-		  <td>{% if center.unittech.name is defined %}
-			  {{ center.unittech.name }}
-			{% else %} {% endif %}</td>
-	      <td><a href=""> {{ center.name }}</a></td>
-	      <td>{{ center.description }}</td>
+	      <td>{{ unittech.id }}</td>
+	      <td><a href="" title="Detalles de la Unidad Técnica {{ unittech.name }}"> {{ unittech.name }}</a></td>
+	      <td>{{ unittech.description }}</td>
 	    </tr>
 	    {% endfor %}
 	  </tbody>

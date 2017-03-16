@@ -205,6 +205,86 @@ class Room
         $this->capacity = $capacity;
     }
 
+    /**
+     * @return string
+     */
+    public function getSortKey()
+    {
+        return $this->sort_key;
+    }
+
+    /**
+     * @param string $sort_key
+     */
+    public function setSortKey($sort_key)
+    {
+        $this->sort_key = $sort_key;
+    }
+
+    /**
+     * @return Issue[]
+     */
+    public function getIssues()
+    {
+        return $this->issues;
+    }
+
+    /**
+     * @param Issue[] $issues
+     */
+    public function setIssues($issues)
+    {
+        $this->issues = $issues;
+    }
+
+    /**
+     * @return Projector[]
+     */
+    public function getProjectors()
+    {
+        return $this->projectors;
+    }
+
+    /**
+     * @param Projector[] $projectors
+     */
+    public function setProjectors($projectors)
+    {
+        $this->projectors = $projectors;
+    }
+
+    /**
+     * @return Microphone[]
+     */
+    public function getMicrophones()
+    {
+        return $this->microphones;
+    }
+
+    /**
+     * @param Microphone[] $microphones
+     */
+    public function setMicrophones($microphones)
+    {
+        $this->microphones = $microphones;
+    }
+
+    /**
+     * @return Pc[]
+     */
+    public function getPcs()
+    {
+        return $this->pcs;
+    }
+
+    /**
+     * @param Pc[] $pcs
+     */
+    public function setPcs($pcs)
+    {
+        $this->pcs = $pcs;
+    }
+
 
 
 }
