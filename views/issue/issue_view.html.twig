@@ -1,18 +1,18 @@
 {% extends "layout_adminLTE.html.twig" %}
-{% set active = 'incident' %}
-{% set title = 'Incident Data Sheet'|trans %}
+{% set active = 'issue' %}
+{% set title = 'Issue Data Sheet'|trans %}
 
 {% block content %}
     <div class="row" style="padding-top: 20px;">
         <div class="col-lg-8">
             <h2>
                 <div class="btn-group pull-right">
-                    <a href="{{ path('incidents') }}" class="btn btn-white"
+                    <a href="{{ path('issues') }}" class="btn btn-white"
                        role="button"><i class="fa fa-list"></i> {{ 'Return to list'|trans }}</a> &nbsp;
-                    <a href="{{ path('person_edit', {'id': incident.id}) }}" class="btn btn-white"
+                    <a href="{{ path('person_edit', {'id': issue.id}) }}" class="btn btn-white"
                        role="button"><i class="fa fa-pencil"></i> {{ 'Edit'|trans }}</a>
                 </div>
-                {{ 'Incident'|trans }} {{ incident.encryptedId }}</h2>
+                {{ 'Issue'|trans }} {{ issue.encryptedId }}</h2>
         </div>
     </div>
     <div class="row" style="padding-top: 20px">
@@ -32,35 +32,35 @@
                 <div role="tabpanel" class="tab-pane active col-lg-6" id="personal" style="padding-top: 20px">
                     <dl class="dl-horizontal">
                         <dt>{{ 'Room'|trans }}:</dt>
-                        <dd>{{ incident.room_id }} {{ incident.encryptedId }}</dd>
+                        <dd>{{ issue.room.room_name }} {{ issue.encryptedId }}</dd>
 
                         <dt>{{ 'User'|trans }}:</dt>
-                        <dd>{{ incident.user_id }}</dd>
+                        <dd>{{ issue.user.firstName }} {{ issue.user.lastName }}</dd>
 
                         <dt>{{ 'Notification date'|trans }}:</dt>
-                        <dd>{{ incident.dateNotification|date('d/m/Y') }}</dd>
+                        <dd>{{ issue.dateNotification|date('d/m/Y') }}</dd>
 
                         <dt>{{ 'Description'|trans }}:</dt>
-                        <dd>{{ incident.description }}</dd>
+                        <dd>{{ issue.description }}</dd>
 
                     </dl>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="contact" style="padding-top: 20px">
                     <dl class="dl-horizontal">
                         <dt>{{ 'Email'|trans }}:</dt>
-                        <dd>{{ incident.id }}</dd>
+                        <dd>{{ issue.id }}</dd>
                     </dl>
                 </div>
                 <div role="tabpanel" class="tab-pane col-lg-6" id="birth" style="padding-top: 20px">
                     <dl class="dl-horizontal">
                         <dt>{{ 'Date of purchase'|trans }}:</dt>
-                        <dd>{{ incident.dateNotification|date('d/m/Y') }}</dd>
+                        <dd>{{ issue.dateNotification|date('d/m/Y') }}</dd>
                     </dl>
                 </div>
                 <div role="tabpanel" class="tab-pane col-lg-6" id="others" style="padding-top: 20px">
                     <dl class="dl-horizontal">
                         <dt>{{ 'State'|trans }}:</dt>
-                        <dd>{{ incident.state_id }}</dd>
+                        <dd>{{ issue.state_id }}</dd>
                     </dl>
                 </div>
             </div>

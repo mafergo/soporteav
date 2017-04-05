@@ -6,7 +6,7 @@ use US\Soporteav\Entity\Room;
 
 /**
  * @Entity 
- * @table(name="tbl_incident")
+ * @table(name="tbl_issue")
  **/
 class Issue
 {
@@ -65,6 +65,12 @@ class Issue
      * @var int
      */
     private $user_id;
+
+    /**
+     * @ManyToOne(targetEntity="\US\Soporteav\Entity\Person", inversedBy="issues")
+     * @var Person
+     */
+    private $user;
     
 
     /**
@@ -80,6 +86,7 @@ class Issue
         $this->estado = $data['estado_id'];
         $this->category = $data['category'];
         $this->user_id = $data['user_id'];
+        $this->user = $data['user'];
     }
 
     /**
@@ -216,6 +223,22 @@ class Issue
     public function setUser_id($user_id)
     {
         $this->user_id = $user_id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param int $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
     }
 
 

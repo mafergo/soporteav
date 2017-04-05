@@ -10,7 +10,8 @@ namespace US\Soporteav\Entity;
 use Entity\Gender;
 
 /**
- * @Entity 
+ * @Entity
+ *  @table(name="tbl_person")
  **/
 class Person
 {
@@ -45,7 +46,7 @@ class Person
      * @ManyToOne(targetEntity="Gender")
      * @var Gender
      */
-    private $gender;
+    //private $gender;
     /**
      * @Column(type="datetime")
      * @var \DateTime

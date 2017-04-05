@@ -30,9 +30,9 @@
 
 		  	{% for room in rooms %}
 		  		<tr>
-		  			<td>{{ room.id }}</td>
+		  			<td>{{ room.id }} {#{ room.center.id }#}</td>
 		  			<td>{{ room.area.area_name }}</td>
-		  			<td><a href="{{ path('room_view') }}/{{ room.id }}" title="Historial del {{ room.room_name }} - {{ room.id }}">{{ room.room_name }}</a></td>
+		  			<td><a href="{{ path('room_view') }}/{{ room.id }}" title="Historial del {{ room.room_name }}">{{ room.room_name }}</a></td>
 		  			<td>{{ room.capacity }}</td>
 		  			<td><i class="fa {% if room.disabled == 0 %}
 		  				fa-check-circle text-green" aria-hidden="true"></i> Operativa.

@@ -6,7 +6,7 @@
 Add: Añadir
 Add Category: Añadir categoría
 Add Center: Añadir Centro
-Add Incident: Comunicar Incidencia
+Add Issue: Comunicar Incidencia
 Add Notice: Añadir noticia
 Add Person: Añadir Persona
 Add Room: Añadir Aula
@@ -44,10 +44,11 @@ Password: Contraseña
 People: Personas
 Person: Persona
 Province: Provincia
-Room: aula
+Room: Aula
 Start Date: Fecha Alta
 Title: Título
 Unit: Unidad
+User: Usuario
 Username: Nombre de Usuario
 Subtitle: Subtítulo
 
@@ -69,8 +70,8 @@ Configuration: Configuración
 Contact Data: Datos de Contacto
 Equipment: Equipamiento
 Home: Inicio
-Incident: Incidencia
-Incidents: Incidencias
+Issue: Incidencia
+Issues: Incidencias
 Inventory: Inventario
 Login: Entrar en el sistema
 Logout: Salir
