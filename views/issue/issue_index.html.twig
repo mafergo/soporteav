@@ -33,12 +33,12 @@
 			
 			{% for issue in issues %}
 		  		<tr>
-		  		<td><a href="{{ path('issue_view', {'id': issue.id}) }}">{{ issue.id }}</a></td>
-		  		<td>{{ issue.encryptedId }}</td>
-		  		<td><a href="{{ path('room_view', {'id': issue.room.id}) }}" title="Incidencias del aula {{ issue.room.room_name }}">{{ issue.room.room_name }}</a></td>
+		  		<td><a href="{{ path('issue_view', {'id': issue.id}) }}"><span class="badge badge-primary">{{ issue.id }}</span></a></td>
+					<td><span class="badge badge-primary">{{ issue.encryptedId }}</span></td>
+		  		<td><a href="{{ path('room_view', {'id': issue.room.id}) }}" title="Incidencias del {{ issue.room.room_name }}"><span class="badge badge-primary">{{ issue.room.room_name }}</span></a></td>
 		  		<td><a href="{{ path('issue_view', {'id': issue.encryptedId}) }}" title="Detalles de la incidencia {{ issue.encryptedId }}">{{ issue.description }}</a></td>
 		  		<td>{{ issue.dateNotification|date("d/m/Y") }}</td>
-		  		<td><a href="{{ path('person_view', {'id': issue.user_id}) }}" title="Incidencias del usuario {{ issue.user_id }}">{{ issue.user_id }}</a></td>
+		  		<td><a href="{{ path('person_view', {'id': issue.user_id}) }}" title="Incidencias del usuario {{ issue.user_id }}">{{ issue.user.firstName }} {{ issue.user.lastName }}</a></td>
 		  		<td><a href="{{ path('person_view', {'id': issue.category.id}) }}" title="Incidencias de la categoria {{ issue.category.id }}">{{ issue.category.id }}</a></td>
 		  		<td>{% if issue.state_id == 4 %}
 		  			<i class="fa fa-check-circle text-green"></i> Resuelto el {{ issue.dateResolution|date("d/m/Y") }}

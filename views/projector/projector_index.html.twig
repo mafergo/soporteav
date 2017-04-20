@@ -20,7 +20,6 @@
 			<tr>
 			  <th>ID</th>
 			  <th>Aula</th>
-			  <th>AulaID</th>
 			  <th>Tipo</th>
 			  <th>Marca</th>
 			  <th>Modelo</th>
@@ -39,8 +38,8 @@
                 {% if projector.type == 1 %}
 		  		<tr>
 		  			<td>{{ projector.id }}</td>
-		  			<td>{{ projector.room.id }}</td>
-		  			<td><a href="{{ path('room_view') }}/{{ projector.room_id }}" title="Historial del {{ projector.room.id }} - {{ projector.room_id }}">{{ projector.room.room_name }}</a></td>
+		  			{#<td>{{ projector.room.id }}</td>#}
+		  			<td><a href="{{ path('room_view') }}/{{ projector.room_id }}" title="Historial del {{ projector.room.room_name }}">{{ projector.room.room_name }}</a></td>
                     <td>{% if projector.type == 1 %}{#{ projector.type }#} Proyector {% endif %}</td>
 					<td>{{ projector.brand }}</td>
 		  			<td>{{ projector.model }}</td>

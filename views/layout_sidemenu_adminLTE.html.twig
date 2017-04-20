@@ -12,7 +12,7 @@
       <div class="user-panel">
         <div class="pull-left image">
           <!--img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"-->
-          <img src="dist/img/mariof.jpg" class="img-circle" alt="User Image">
+          <img src="{{ path('homepage') }}dist/img/mariof.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>Mario Fernández</p>
@@ -37,7 +37,7 @@
       <ul class="sidebar-menu">
         <li class="header">Admin</li>
         <!-- Optionally, you can add icons to the links -->
-        <li ><a href="admin"><i class="fa fa-cog"></i> <span>Intranet</span></a></li>
+        <li ><a href="{{ path('login') }}"><i class="fa fa-cog"></i> <span>Intranet</span></a></li>
         <li class="{% if active in issues_actives %}active {% endif %}treeview">
           <a href="#"><i class="fa fa-fire-extinguisher" aria-hidden="true"></i> <span>Incidencias</span>
             <span class="pull-right-container">

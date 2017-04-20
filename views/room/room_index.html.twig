@@ -34,7 +34,7 @@
 		  			<td>{{ room.id }}</td>
 					<td>
 						{% for center in room.centers %}
-							{{ center.name }}{% if not loop.last %}, {% endif %}
+						<a href="">{{ center.name }}</a>{% if not loop.last %}, {% endif %}
 						{% endfor %}
 
 					</td>

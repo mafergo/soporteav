@@ -33,9 +33,9 @@
 	  <tbody>
 	    {% for center in centers %}
 	    <tr>
-			<td>{{ center.id }}</td>
+			<td><a href=""><span class="badge badge-primary">{{ center.id }}</span></a></td>
 		  <td>{% if center.unittech.name is defined %}
-			  {{ center.unittech.name }}
+				  <a href="">{{ center.unittech.name }}</a>
 			{% else %} {% endif %}</td>
 			<td>{{ center.shortName }}</td>
 	      <td><a href=""> {{ center.name }}</a></td>
