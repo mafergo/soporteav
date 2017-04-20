@@ -39,9 +39,9 @@
 		  		<td><a href="{{ path('issue_view', {'id': issue.encryptedId}) }}" title="Detalles de la incidencia {{ issue.encryptedId }}">{{ issue.description }}</a></td>
 		  		<td>{{ issue.dateNotification|date("d/m/Y") }}</td>
 		  		<td><a href="{{ path('person_view', {'id': issue.user_id}) }}" title="Incidencias del usuario {{ issue.user_id }}">{{ issue.user.firstName }} {{ issue.user.lastName }}</a></td>
-		  		<td><a href="{{ path('person_view', {'id': issue.category.id}) }}" title="Incidencias de la categoria {{ issue.category.id }}">{{ issue.category.id }}</a></td>
+		  		<td><a href="{{ path('person_view', {'id': issue.category.id}) }}" title="Incidencias de la categoria {{ issue.category.name }}">{{ issue.category.name }}</a></td>
 		  		<td>{% if issue.state_id == 4 %}
-		  			<i class="fa fa-check-circle text-green"></i> Resuelto el {{ issue.dateResolution|date("d/m/Y") }}
+		  			<i class="fa fa-check-circle text-green"></i> Resuelto {{ issue.dateResolution|date("d/m/Y") }}
 	  			{% else %}
 	  				<i class="fa fa-close text-red"></i> En proceso
   				{% endif %}</td>
