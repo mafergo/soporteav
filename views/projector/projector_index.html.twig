@@ -21,6 +21,7 @@
 			  <th>ID</th>
 			  <th>Aula</th>
 			  <th>AulaID</th>
+			  <th>Tipo</th>
 			  <th>Marca</th>
 			  <th>Modelo</th>
 			  <th>Num serie</th>
@@ -35,43 +36,25 @@
 
 		  <tbody>
 		  	{% for projector in projectors %}
+                {% if projector.type == 1 %}
 		  		<tr>
 		  			<td>{{ projector.id }}</td>
 		  			<td>{{ projector.room.id }}</td>
 		  			<td><a href="{{ path('room_view') }}/{{ projector.room_id }}" title="Historial del {{ projector.room.id }} - {{ projector.room_id }}">{{ projector.room.room_name }}</a></td>
-		  			<td>{{ projector.brand }}</td>
+                    <td>{% if projector.type == 1 %}{#{ projector.type }#} Proyector {% endif %}</td>
+					<td>{{ projector.brand }}</td>
 		  			<td>{{ projector.model }}</td>
 		  			<td>{{ projector.serialNum }}</td>
 		  			<td>{{ projector.ref }}</td>
 		  			<td>{{ projector.inventory }}</td>
-		  			<td>{{ projector.projectorRoseta }}</td>
-		  			<td>{{ projector.projectorIp }}</td>
-		  			<td>{{ projector.projectorEthernet }}</td>
+		  			<td>{{ projector.roseta }}</td>
+		  			<td>{{ projector.ip }}</td>
+		  			<td>{{ projector.ethernet }}</td>
 		  			<td>{{ projector.datePurchase|date("d/m/Y") }}</td>
 	  			</tr>
+                {% endif %}
 		  	{% endfor %}
-			{#foreach $incidencias as $incidencia}
-			{if $incidencia->usuario_id eq $usuario_id}
-			<tr>
-			  <td><a href="index.php?page=aula_detalle&aula={$incidencia->room->id}" title="Ver historial del aula.">{$incidencia->room->room_name}</a></td>
-			  <td>{$incidencia->incidencia}<p><a href="index.php?page=incidencia_detalles&incidencia={$incidencia->idencriptado}" title="Ver detalles de la incidencia '{$incidencia->idencriptado}'.">Más detalles...</a></p></td>
-			  <td>{$incidencia->f_notificacion|date_format:"%d/%m/%Y"}</td>
-			  <td><a href="index.php?page=incidencia_usuario&user={$incidencia->usuario_id}" title="Ver incidencias de {$incidencia->usuario->nombre} {$incidencia->usuario->apellidos}.">{$incidencia->usuario->nombre} {$incidencia->usuario->apellidos}</a></td>
-			  <td>{*<a href="index.php?page=categoría_detalles&categoria={$incidencia->idencriptado}" title="Ver incidencias de la categoría '{$incidencia->categoria->nombre}'.">*}{$incidencia->categoria->nombre}{*</a>*}</td>
-				<td>
-				{if $incidencia->estado_id == 1}
-					{*$incidencia->estado_id*}<i class="fa fa-wrench" aria-hidden="true"></i> Pendiente.
-				{elseif $incidencia->estado_id == 2}
-					<i class="fa fa-close" aria-hidden="true"></i> Inoperativo.
-				{elseif $incidencia->estado_id == 3}
-					<i class="fa fa-wrench" aria-hidden="true"></i> En proceso.
-				{else}
-					<i class="fa fa-check" aria-hidden="true"></i> Resuelto el {$incidencia->f_resolucion|date_format:"%d/%m/%Y"}.
-				{/if}
-				</td>
-			</tr>
-			{/if}
-			{/foreach#}
+
 		  </tbody>
 		</table>
 		{% include "pagination.html.twig" %}
@@ -79,5 +62,5 @@
 	{% else %}
 		No hay aulas que mostrar.
 	{% endif %}
-        
+
 {% endblock %}

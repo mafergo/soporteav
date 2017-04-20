@@ -85,10 +85,15 @@ class Room
 
 
     /**
-     * @ManyToOne(targetEntity="\US\Soporteav\Entity\Center", inversedBy="rooms")
-     * @var Center
+     * @ManyToMany(targetEntity="\US\Soporteav\Entity\Center", inversedBy="rooms")
+     * @JoinTable(name="room_center")
+     *
+     *
+     *     joinColumns={@JoinColumn(name="room_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="center_id", referencedColumnName="id")}
+     *
      */
-    //private $center;
+    private $centers;
 
 
     
@@ -106,6 +111,8 @@ class Room
         $this->sort_key = $data['$sort_key'];
         $this->description = $data['description'];
         $this->capacity = $data['capacity'];
+        //$this->center = $data['center'];
+        //$this->rooms = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -283,6 +290,23 @@ class Room
     public function setPcs($pcs)
     {
         $this->pcs = $pcs;
+    }
+
+
+    /**
+     * @return Center[]
+     */
+    public function getCenters()
+    {
+        return $this->centers;
+    }
+
+    /**
+     * @param Center[] $center
+     */
+    public function setCenter($center)
+    {
+        $this->center = $center;
     }
 
 

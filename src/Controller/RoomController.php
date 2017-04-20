@@ -49,6 +49,7 @@ class RoomController
         $offset = ($currentPage - 1) * $limit;
 
         $rooms = $this->roomRepository->findBy($criteria, $orderBy, $limit, $offset);
+        //var_dump($rooms);
         return $app['twig']->render('room/room_index.html.twig', array(
             'rooms' => $rooms,
             'currentPage' => $currentPage,

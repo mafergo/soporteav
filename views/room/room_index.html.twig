@@ -18,7 +18,8 @@
 		<table class="table table-striped">
 		  <thead>
 			<tr>
-			  <th>Centro</th>
+			  <th>ID</th>
+				<th>Centro</th>
 			  <th>Planta</th>
 			  <th>Aula</th>
 			  <th>Capacidad</th>
@@ -30,7 +31,13 @@
 
 		  	{% for room in rooms %}
 		  		<tr>
-		  			<td>{{ room.id }} {#{ room.center.id }#}</td>
+		  			<td>{{ room.id }}</td>
+					<td>
+						{% for center in room.centers %}
+							{{ center.name }}{% if not loop.last %}, {% endif %}
+						{% endfor %}
+
+					</td>
 		  			<td>{{ room.area.area_name }}</td>
 		  			<td><a href="{{ path('room_view') }}/{{ room.id }}" title="Historial del {{ room.room_name }}">{{ room.room_name }}</a></td>
 		  			<td>{{ room.capacity }}</td>

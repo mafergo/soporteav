@@ -30,6 +30,12 @@ class Projector
     private $room_id;
 
     /**
+     * @Column(type="integer")
+     * @var int
+     */
+    private $type;
+
+    /**
      * @Column(type="string")
      * @var string
      */
@@ -47,14 +53,13 @@ class Projector
      * @Column(type="string")
      * @var string
      */
-    private $projectorIp;
-
+    private $ip;
 
     /**
      * @Column(type="string")
      * @var string
      */
-    private $projectorEthernet;
+    private $ethernet;
 
     /**
      * @Column(type="integer")
@@ -66,7 +71,7 @@ class Projector
      * @Column(type="string")
      * @var string
      */
-    private $projectorRoseta;
+    private $roseta;
 
     /**
      * @Column(type="string")
@@ -99,12 +104,13 @@ class Projector
     {
         $this->room = $data['room'];
         $this->room_id = $data['room_id'];
+        $this->type = $data['type'];
         $this->brand = $data['brand'];
         $this->model = $data['model'];
-        $this->projectorIp = $data['projectorIp'];
-        $this->projectorEthernet = $data['projectorEthernet'];
+        $this->ip = $data['ip'];
+        $this->ethernet = $data['ethernet'];
         $this->pc_id = $data['pc_id'];
-        $this->projectorRoseta = $data['projectorRoseta'];
+        $this->roseta = $data['projectorRoseta'];
         $this->serialNum = $data['serialNum'];
         $this->ref = $data['ref'];
         $this->inventory = $data['inventory'];
@@ -133,14 +139,30 @@ class Projector
     public function getRoom_id()
     {
         return $this->room_id;
-    }
+    }/**
 
     /**
-     * @param string $brand
+     * @param string $room_id
      */
     public function setRoom_id($room_id)
     {
         $this->brand = $room_id;
+    }
+
+    /*
+    * @return int
+    */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param int $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
     }
 
     /**
@@ -152,7 +174,7 @@ class Projector
     }
 
     /**
-     * @param string $firstName
+     * @param string $brand
      */
     public function setBrand($brand)
     {
@@ -178,15 +200,15 @@ class Projector
     /**
      * @return string
      */
-    public function getProjectorIp()
+    public function getIp()
     {
-        return $this->projectorIp;
+        return $this->ip;
     }
 
     /**
      * @param string $description
      */
-    public function setProjectorIp($projectorIp)
+    public function setIp($ip)
     {
         $this->projectorIp = $projectorIp;
     }
@@ -194,17 +216,17 @@ class Projector
     /**
      * @return string
      */
-    public function getProjectorEthernet()
+    public function getEthernet()
     {
-        return $this->projectorEthernet;
+        return $this->ethernet;
     }
 
     /**
      * @param string $description
      */
-    public function setProjectorEthernet($projectorEthernet)
+    public function setEthernet($ethernet)
     {
-        $this->projectorEthernet = $projectorEthernet;
+        $this->ethernet = $ethernet;
     }
 
     /**
@@ -226,17 +248,17 @@ class Projector
     /**
      * @return string
      */
-    public function getProjectorRoseta()
+    public function getRoseta()
     {
-        return $this->projectorRoseta;
+        return $this->roseta;
     }
 
     /**
      * @param string $projectorRoseta
      */
-    public function setProjectorRoseta($projectorRoseta)
+    public function setRoseta($roseta)
     {
-        $this->projectorRoseta = $projectorRoseta;
+        $this->roseta = $roseta;
     }
 
     /**

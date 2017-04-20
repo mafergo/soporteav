@@ -31,10 +31,16 @@ class Center
 
 
     /**
-     * @OneToMany(targetEntity="\US\Soporteav\Entity\Room", mappedBy="center")
+     * @ManyToMany(targetEntity="\US\Soporteav\Entity\Room", mappedBy="centers")
      * @var Room[]
      */
     private $rooms;
+
+    /**
+     * @Column(type="string")
+     * @var string
+     */
+    private $shortName;
 
     /**
      * @ManyToOne(targetEntity="\US\Soporteav\Entity\Unittech", inversedBy="centers")
@@ -51,6 +57,8 @@ class Center
         $this->name = $data['name'];
         $this->description = $data['description'];
         $this->unittech = $data['unittech'];
+        $this->shortName = $data['shortName'];
+        //$this->rooms = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -92,6 +100,22 @@ class Center
     public function setDescription($description)
     {
         $this->description = $description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShortName()
+    {
+        return $this->shortName;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setShortName($shortName)
+    {
+        $this->shortName = $shortName;
     }
 
     /**
