@@ -99,6 +99,7 @@ class IssueController
      */
     public function saveAction(Request $request, Application $app)
     {
+        dump($request);
         $data['encryptedId'] = $request->get('encryptedId');
         $data['description'] = $request->get('description');
         //$data['room_id'] = $request->get('room_id');

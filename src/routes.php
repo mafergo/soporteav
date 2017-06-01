@@ -81,8 +81,13 @@ $app->get('/incidencia/{id}', 'controller.issue:viewAction')
     ->assert('id', '\d+')
     ->bind('issue_view');
 
+// Grabar incidencias
+$app->post('/incidencia/grabar', 'controller.issue:saveAction')
+    ->bind('issue_save');
+
 // Incidencias nuevas
-$app->get('/incidencia_nueva', 'controller.issue:addAction')->bind('issue_add');
+$app->get('/incidencia_nueva', 'controller.issue:addAction')
+    ->bind('issue_add');
 
 $app->get('/pcs', function () use ($app) {
     return $app['twig']->render('pc/pc_index.html.twig', array());

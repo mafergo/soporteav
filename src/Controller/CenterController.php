@@ -66,9 +66,11 @@ class CenterController
     {
         /** @var center $center */
         $center = $this->centerRepository->find($id);
+        $issueCategories = $app['repository.issueCategory']->findAll();
         if ($center) {
              $response = $app['twig']->render('center/center_view.html.twig', array(
-                'center' => $center
+                'center' => $center,
+                'issueCategories' => $issueCategories
             ));
         } else {
             $response = $this->redirectOnInvalidId($app, $id);

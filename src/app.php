@@ -7,38 +7,25 @@
  * ¡Silex itself is a Pimple container!
  */
 
-// Center
 use US\Soporteav\Controller\CenterController;
 use US\Soporteav\Repository\CenterRepository;
-// Issue
 use US\Soporteav\Controller\IssueController;
 use US\Soporteav\Repository\IssueRepository;
-// Microphone
+use US\Soporteav\Repository\IssueCategoryRepository;
 use US\Soporteav\Controller\MicrophoneController;
 use US\Soporteav\Repository\MicrophoneRepository;
-// New
 use US\Soporteav\Controller\NoticeController;
 use US\Soporteav\Repository\NoticeRepository;
-// Person
 use US\Soporteav\Controller\PersonController;
 use US\Soporteav\Repository\PersonRepository;
-
-// Pc
 use US\Soporteav\Controller\PcController;
 use US\Soporteav\Repository\PcRepository;
-
-// Projector
 use US\Soporteav\Controller\ProjectorController;
 use US\Soporteav\Repository\ProjectorRepository;
-
-// Room
 use US\Soporteav\Controller\RoomController;
 use US\Soporteav\Repository\RoomRepository;
-
-// Unittech
 use US\Soporteav\Controller\UnittechController;
 use US\Soporteav\Repository\UnittechRepository;
-
 use Silex\Application;
 use Silex\Provider\HttpFragmentServiceProvider;
 use Silex\Provider\RoutingServiceProvider;
@@ -130,6 +117,10 @@ $app['controller.issue'] = function ($app) {
 // Register repositories as Silex services
 $app['repository.issue'] = function ($app) {
     return new IssueRepository($app['orm.em'], $app['orm.em']->getClassMetadata('US\Soporteav\Entity\Issue\Issue'));
+};
+
+$app['repository.issueCategory'] = function ($app) {
+    return new IssueCategoryRepository($app['orm.em'], $app['orm.em']->getClassMetadata('US\Soporteav\Entity\Issue\Category'));
 };
 
 // Register repositories as Silex services
