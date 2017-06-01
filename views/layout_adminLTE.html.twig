@@ -7,7 +7,23 @@
         <title>{{ title }} - Universidad de Sevilla</title>
         {% block css %}
             {% include "layout_css_adminLTE.html.twig" %}
+
+            <link rel="stylesheet" type="text/css" href="../../media/css/jquery.dataTables.css">
+            <link rel="stylesheet" type="text/css" href="../resources/syntax/shCore.css">
+            <link rel="stylesheet" type="text/css" href="../resources/demo.css">
         {% endblock %}
+        <script type="text/javascript" language="javascript" src="../../media/js/jquery.dataTables.js">
+        </script>
+        <script type="text/javascript" language="javascript" src="../resources/syntax/shCore.js">
+        </script>
+        <script type="text/javascript" language="javascript" src="../resources/demo.js">
+        </script>
+        <script type="text/javascript" language="javascript" class="init">
+            $(document).ready(function() {
+                $('#example').DataTable();
+            } );
+        </script>
+
     </head>
 
     <body class="hold-transition skin-red sidebar-mini">

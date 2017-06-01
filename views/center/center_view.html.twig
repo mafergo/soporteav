@@ -1,0 +1,172 @@
+{% extends "layout_adminLTE.html.twig" %}
+{% set active = 'centers' %}
+{% set title = center.name  %}
+
+{% block css %}
+    {{ parent() }}
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+	<div class="row" style="padding-top: 20px;">
+		<div class="col-lg-8">
+			<h2>
+				<div class="btn-group pull-right">
+					<a href="{{ path('centers') }}" class="btn btn-white"
+					   role="button" title="Volver al listado de Centros"><i class="fa fa-list"></i> {{ 'Return to list'|trans }}</a> &nbsp;
+					<a href="{#{ path('center_edit', {'id': center.id}) }#}" class="btn btn-white"
+					   role="button" title="Editar el Centro"><i class="fa fa-pencil"></i> {{ 'Edit'|trans }}</a>
+				</div>
+                {{ center.name }}</h2>
+		</div>
+	</div>
+	<div class="row" style="padding-top: 20px">
+	<div class="col-lg-12">
+
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="active"><a href="#general" aria-controls="general" role="tab"
+												  data-toggle="tab">{{ 'General Data'|trans }}</a></li>
+		<li role="presentation"><a href="#inventory" aria-controls="inventory" role="tab"
+								   data-toggle="tab">{{ 'Rooms'|trans }}</a></li>
+		<li role="presentation"><a href="#issues" aria-controls="issues" role="tab"
+								   data-toggle="tab">{{ 'Issues'|trans }}</a></li>
+		<li role="presentation"><a href="#start" aria-controls="start" role="tab"
+								   data-toggle="tab">{{ 'Start'|trans }}</a></li>
+	</ul>
+	<div class="tab-content">
+	<div role="tabpanel" class="tab-pane active col-lg-6" id="general" style="padding-top: 20px">
+		<dl class="dl-horizontal">
+			<dt>{{ 'Center'|trans }}:</dt>
+			<dd>{{ center.name }}</dd>
+
+			<dt>{{ 'Capacity'|trans }}:</dt>
+			<dd>{{ center.id }}</dd>
+
+			<dt>{{ 'Estado'|trans }}:</dt>
+			{#<dd><i class="fa {% if room.disabled == 0 %}
+		  				fa-check-circle text-green" aria-hidden="true"></i> Operativa.
+                {% else %}
+					fa-close text-red" aria-hidden="true"></i> No disponible.
+                {% endif %}</dd>{#}
+
+		</dl>
+	</div>
+	<div role="tabpanel" class="tab-pane" id="inventory" style="padding-top: 20px">
+		{% if center.rooms is defined %}
+		<table class="table table-striped">
+			<thead>
+			<tr>
+				<th>ID</th>
+				<th>Planta</th>
+				<th>Aula</th>
+				<th>Capacidad</th>
+				<th>Descripción</th>
+				<th>Estado</th>
+			</tr>
+			</thead>
+
+			<tbody>
+            {% for room in center.rooms %}
+                {#% if projector.type == 1 %#}
+					<tr>
+						<td>{{ room.id }}</td>
+						<td>{{ room.area.area_name }}</td>
+						<td><a href="{{ path('room_view', {'id': room.id}) }}" title="Historial del {{ room.room_name }}">{{ room.room_name }}</a></td>
+						<td>{{ room.capacity }}</td>
+						<td>{{ room.description }}</td>
+						<td><i class="fa {% if room.disabled == 0 %}
+		  				fa-check-circle text-green" aria-hidden="true"></i> Operativa.
+                            {% else %}
+								fa-close text-red" aria-hidden="true"></i> No disponible.
+                            {% endif %}</td>
+					</tr>
+                {#% endif %#}
+            {% endfor %}
+
+
+			</tbody>
+		</table>
+        {#% include "pagination.html.twig" %#}
+        {% else %}
+			No hay aulas que mostrar.
+        {% endif %}
+	</div>
+	<div role="tabpanel" class="tab-pane" id="issues" style="padding-top: 20px">
+        {#% include "pagination.html.twig" %#}
+		<form action="{#{ path('person_save') }#}" method="post"  enctype='multipart/form-data'>
+			{#<div class="form-group">
+				<label for="category">{{ 'Category'|trans }}</label>
+				<div class="controls">
+					<select id="category" name="category"  class="form-control placeholder" required>
+						<option value="" name="category">Seleccione una categoria. <i class="fa fa-sort"></i></option>
+                        {% for category in categoryNews %}
+							<option value="{{ category.id }}" name="category">{{ category.name }}</option>
+                        {% endfor %}
+					</select>
+				</div>
+                #}
+
+
+				<div class="form-group" id="select_room">
+					<label for="room">{{ 'Room'|trans }}</label>
+					<div class="controls">
+                        {% if center.rooms is defined %}
+							<select id="room" name="room"  class="form-control placeholder" required>
+								<option value="" name="room">Seleccione un espacio. <i class="fa fa-sort"></i></option>
+                                {% for room in center.rooms %}
+									<option value="{{ room.id }}" name="room">{{ room.room_name }}</option>
+                                {% endfor %}
+							</select>
+                        {% else %}
+                            {{ "Not rooms defined yet"|trans }}
+                        {% endif %}
+					</div>
+				</div>
+
+				<!--div class="form-group">
+                    <label for="email">{{ 'Email'|trans }}</label>
+                    <input type="text" class="form-control" name="email">
+                </div-->
+
+				<!-- Textarea -->
+				<div class="form-group">
+					<label class="control-label" for="description">Cuerpo de la noticia:</label>
+					<div class="controls">
+						<textarea id="desarrollo" name="description" class="form-control" required  placeholder="Describa detalladamente la incidencia."></textarea>
+					</div>
+				</div>
+
+				<button type="submit" class="btn btn-primary">{{ 'Save'|trans }}</button>
+				<button type="reset" class="btn btn-danger">{{ 'Cancel'|trans }}</button>
+		</form>
+	</div>
+	<div role="tabpanel" class="tab-pane" id="start" style="padding-top: 20px">
+        {% if center.rooms is defined %}
+			<div class="row">
+                {% for room in center.rooms %}
+					<form action="" method="post">
+						<div class="col-xs-12 col-sm-3 col-md-2">
+							<button class="btn {{room.id}} btn-default btn-block proj" id="{{room.id}}" name="formEnviado" id="formEnviado">{{room.room_name}}</button>
+						</div>
+					</form>
+                {% endfor %}
+			</div>
+			<div class="row">
+				<div class="col-sm-3 .col-sm-offset-6 col-md-2 col-md-offset-4">
+					<button class="btn btn-success btn-block proj" type="submit">Encender todos</button>
+				</div>
+				<div class="col-sm-3 col-md-2">
+					<button class="btn btn-danger btn-block proj" type="submit">Apagar todos</button>
+				</div>
+			</div>
+        {% else %}
+			No hay aulas que mostrar.
+        {% endif %}
+	</div>
+
+        
+{% endblock %}

@@ -38,7 +38,7 @@
 		  		<tr>
 		  			<td>{{ microphone.id }}</td>
 		  			<td>{{ microphone.room.id }}</td>
-		  			<td><a href="{{ path('room_view') }}/{{ microphone.room_id }}" title="Historial del {{ microphone.room.room_name }} - {{ microphone.room_id }}">{{ microphone.room.room_name }}</a></td>
+		  			<td><a href="{{ path('room_view', {'id': microphone.room.id}) }}" title="Historial del {{ microphone.room.room_name }} - {{ microphone.room_id }}">{{ microphone.room.room_name }}</a></td>
 		  			<td>{{ microphone.brand }}</td>
 		  			<td>{{ microphone.model }}</td>
 		  			<td>{{ microphone.serialNum }}</td>

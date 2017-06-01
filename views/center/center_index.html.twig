@@ -38,7 +38,7 @@
 				  <a href="">{{ center.unittech.name }}</a>
 			{% else %} {% endif %}</td>
 			<td>{{ center.shortName }}</td>
-	      <td><a href=""> {{ center.name }}</a></td>
+	      <td><a href="{{ path('center_view', {'id': center.id}) }}"> {{ center.name }}</a></td>
 	      <td>{{ center.description }}</td>
 	    </tr>
 	    {% endfor %}

@@ -38,7 +38,6 @@ class IssueController
     {
         $criteria = array();
         $orderBy = array("id" => "desc");
-        //$orderBy = 'id desc';
         // Paginación
         $currentPage = $page;
         $total = $this->issueRepository->count();
@@ -99,8 +98,11 @@ class IssueController
      */
     public function saveAction(Request $request, Application $app)
     {
-        $data['name'] = $request->get('name');
+        $data['encryptedId'] = $request->get('encryptedId');
         $data['description'] = $request->get('description');
+        //$data['room_id'] = $request->get('room_id');
+        $data['room'] = $app['repository.room']->find($request->get('room_id'));
+        $data['dateNotification'] = $request->get('dateNotification');
 
         if ($data['id'] = $request->get('id')) {
             /** @var Issue $issue */
@@ -144,7 +146,11 @@ class IssueController
     public function addAction(Application $app)
     {
 
-        return $app['twig']->render('issue/issue_add.html.twig');
+        $centers = $app['repository.center']->findAll();
+        return $app['twig']->render('issue/issue_add.html.twig', array(
+            'centers' => $centers
+        ));
+
     }
 
     /**
@@ -186,10 +192,15 @@ class IssueController
         return $response;
     }
 
-    /**
-     * @param Request $request
-     * @param Application $app
-     * @return Response/ResponseRedirect
-     */
-    
+    public function selectRoomsAction(Request $request,Application $app)
+    {
+        $center_id = $request->get("center_id");
+        $center = $app['repository.center']->find($center_id);
+//        dump($center);
+        //$rooms = $app['repository.room']->findBy(array('id'=>$center_id));
+        return $app['twig']->render('issue/select_room_include.html.twig', array(
+            'rooms' => $center->getRooms()
+        ));
+
+    }
 }

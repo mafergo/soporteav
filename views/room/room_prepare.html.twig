@@ -12,17 +12,13 @@
 
 {% block content %}
 
-{# Para probar y luego borrar #}
-{% set aulas = [{'entity': 'Facultad de Derecho', 'area': 'Planta semisótano', 'room_id': '1', 'room_name': 'Aula 00.1', 'capacity': '', 'status': 'Operativa'}, {'entity': 'Facultad de Derecho', 'area': 'Planta semisótano', 'room_id': '2', 'room_name': 'Aula 00.2', 'capacity': '', 'status': 'Operativa'}] %}
-
-
   <h2 class="sub-header">{{ title }}</h2>
-  {% if aulas is defined %}
+  {% if rooms is defined %}
   	<div class="row">
-		{% for aula in aulas %}
-		<form action="index.php?page=aula_preparar_grabar" method="post">
-			<div class="col-sm-3 col-md-2">
-			<button class="btn {$projector->statusBoton} btn-success btn-block proj" id="{$projector->id}" name="formEnviado" id="formEnviado">{{aula.room_name}}</button>
+		{% for room in rooms %}
+		<form action="" method="post">
+			<div class="col-xs-12 col-sm-3 col-md-2">
+			<button class="btn {{room.id}} btn-default btn-block proj" id="{{room.id}}" name="formEnviado" id="formEnviado">{{room.room_name}}</button>
 			</div>
 		</form>
 		{% endfor %}

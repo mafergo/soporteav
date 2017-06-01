@@ -1,6 +1,6 @@
 {% extends "layout_adminLTE.html.twig" %}
 {% set active = 'rooms' %}
-{% set title = 'Rooms'|trans %}
+{% set title = room.room_name  %}
 
 {% block css %}
     {{ parent() }}
@@ -12,55 +12,169 @@
 
 {% block content %}
 
-{# Para probar y luego borrar #}
-{% set incidencias = [{'name': 'detalles de la incidencia', 'room_name': '00.1', 'f_notificacion': '2015-01-16', 'user': 'mariof', 'categoria': 'Aulas', 'status': 'Pendiente'}, {'name': 'detalles de la incidencia', 'room_name': '00.2', 'f_notificacion': '2015-01-21', 'user': 'mariof','categoria': 'Aulas', 'status': 'Resuelto'}] %}
-
-  <h2 class="sub-header">{{ title }}</h2>
-  {% if incidencias is defined %}
-  <div class="table-responsive">
-		<table class="table table-striped">
-		  <thead>
-			<tr>
-			  <th>Aula</th>
-			  <th>Incidencia</th>
-			  <th>Fecha</th>
-			  <th>Por</th>
-			  <th>Categoría</th>
-			  <th>Estado</th>
-			</tr>
-		  </thead>
-
-		  <tbody>
-		  	{% for incidencia in incidencias %}
-		  		<tr><td>{{ incidencia.room_name }}</td><td>{{ incidencia.name }}</td><td>{{ incidencia.f_notificacion }}</td><td>{{ incidencia.user }}</td><td>{{ incidencia.categoria }}</td><td>{{ incidencia.status }}</td></tr>
-		  	{% endfor %}
-			{#foreach $incidencias as $incidencia}
-			{if $incidencia->usuario_id eq $usuario_id}
-			<tr>
-			  <td><a href="index.php?page=aula_detalle&aula={$incidencia->room->id}" title="Ver historial del aula.">{$incidencia->room->room_name}</a></td>
-			  <td>{$incidencia->incidencia}<p><a href="index.php?page=incidencia_detalles&incidencia={$incidencia->idencriptado}" title="Ver detalles de la incidencia '{$incidencia->idencriptado}'.">Más detalles...</a></p></td>
-			  <td>{$incidencia->f_notificacion|date_format:"%d/%m/%Y"}</td>
-			  <td><a href="index.php?page=incidencia_usuario&user={$incidencia->usuario_id}" title="Ver incidencias de {$incidencia->usuario->nombre} {$incidencia->usuario->apellidos}.">{$incidencia->usuario->nombre} {$incidencia->usuario->apellidos}</a></td>
-			  <td>{*<a href="index.php?page=categoría_detalles&categoria={$incidencia->idencriptado}" title="Ver incidencias de la categoría '{$incidencia->categoria->nombre}'.">*}{$incidencia->categoria->nombre}{*</a>*}</td>
-				<td>
-				{if $incidencia->estado_id == 1}
-					{*$incidencia->estado_id*}<i class="fa fa-wrench" aria-hidden="true"></i> Pendiente.
-				{elseif $incidencia->estado_id == 2}
-					<i class="fa fa-close" aria-hidden="true"></i> Inoperativo.
-				{elseif $incidencia->estado_id == 3}
-					<i class="fa fa-wrench" aria-hidden="true"></i> En proceso.
-				{else}
-					<i class="fa fa-check" aria-hidden="true"></i> Resuelto el {$incidencia->f_resolucion|date_format:"%d/%m/%Y"}.
-				{/if}
-				</td>
-			</tr>
-			{/if}
-			{/foreach#}
-		  </tbody>
-		</table>
+	<div class="row" style="padding-top: 20px;">
+		<div class="col-lg-8">
+			<h2>
+				<div class="btn-group pull-right">
+					<a href="{{ path('issues') }}" class="btn btn-white"
+					   role="button"><i class="fa fa-list"></i> {{ 'Return to list'|trans }}</a> &nbsp;
+					<a href="{{ path('person_edit', {'id': room.id}) }}" class="btn btn-white"
+					   role="button"><i class="fa fa-pencil"></i> {{ 'Edit'|trans }}</a>
+				</div>
+                {{ room.room_name }}</h2>
+		</div>
 	</div>
-	{% else %}
-		No hay incidencias que mostrar.
-	{% endif %}
+	<div class="row" style="padding-top: 20px">
+	<div class="col-lg-12">
+
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="active"><a href="#general" aria-controls="general" role="tab"
+												  data-toggle="tab">{{ 'General Data'|trans }}</a></li>
+		<li role="presentation"><a href="#inventory" aria-controls="inventory" role="tab"
+								   data-toggle="tab">{{ 'Inventory'|trans }}</a></li>
+		<li role="presentation"><a href="#issues" aria-controls="issues" role="tab"
+								   data-toggle="tab">{{ 'Issues'|trans }}</a></li>
+		<li role="presentation"><a href="#others" aria-controls="others" role="tab"
+								   data-toggle="tab">{{ 'Others'|trans }}</a></li>
+	</ul>
+	<div class="tab-content">
+	<div role="tabpanel" class="tab-pane active col-lg-6" id="general" style="padding-top: 20px">
+		<dl class="dl-horizontal">
+			<dt>{{ 'Room'|trans }}:</dt>
+			<dd>{{ room.room_name }}</dd>
+
+			<dt>{{ 'Center'|trans }}:</dt>
+			<dd>{% for center in room.centers %}
+					<a href="">{{ center.name }}</a>{% if not loop.last %}, {% endif %}
+                {% endfor %}</dd>
+
+			<dt>{{ 'Capacity'|trans }}:</dt>
+			<dd>{{ room.capacity }}</dd>
+
+			<dt>{{ 'Estado'|trans }}:</dt>
+			<dd><i class="fa {% if room.disabled == 0 %}
+		  				fa-check-circle text-green" aria-hidden="true"></i> Operativa.
+                {% else %}
+					fa-close text-red" aria-hidden="true"></i> No disponible.
+                {% endif %}</dd>
+
+		</dl>
+	</div>
+	<div role="tabpanel" class="tab-pane" id="inventory" style="padding-top: 20px">
+		<table class="table table-striped">
+			<thead>
+			<tr>
+				<th>ID</th>
+				<th>Aula</th>
+				<th>Tipo</th>
+				<th>Marca</th>
+				<th>Modelo</th>
+				<th>Num serie</th>
+				<th>Referencia</th>
+				<th>Inventario</th>
+				<th>Roseta</th>
+				<th>IP</th>
+				<th>Ethernet</th>
+				<th>Fecha de compra</th>
+			</tr>
+			</thead>
+
+			<tbody>
+            {% for projector in room.projectors %}
+                {% if projector.type == 1 %}
+					<tr>
+						<td>{{ projector.id }}</td>
+                        {#<td>{{ projector.room.id }}</td>#}
+						<td><a href="{{ path('room_view', {'id': projector.room.id}) }}" title="Historial del {{ projector.room.room_name }}">{{ projector.room.room_name }}</a></td>
+						<td>{% if projector.type == 1 %}{#{ projector.type }#} Proyector {% endif %}</td>
+						<td>{{ projector.brand }}</td>
+						<td>{{ projector.model }}</td>
+						<td>{{ projector.serialNum }}</td>
+						<td>{{ projector.ref }}</td>
+						<td>{{ projector.inventory }}</td>
+						<td>{{ projector.roseta }}</td>
+						<td>{{ projector.ip }}</td>
+						<td>{{ projector.ethernet }}</td>
+						<td>{{ projector.datePurchase|date("d/m/Y") }}</td>
+					</tr>
+                {% endif %}
+            {% endfor %}
+
+            {% for pc in room.pcs %}
+                {#% if pc.type == 1 %#}
+					<tr>
+						<td>{{ pc.id }}</td>
+                        {#<td>{{ projector.room.id }}</td>#}
+						<td><a href="{{ path('room_view', {'id': pc.room.id}) }}" title="Historial del {{ pc.room.room_name }}">{{ pc.room.room_name }}</a></td>
+						<td>{#% if pc.type == 1 %#}Ordenador {#% endif %#}</td>
+						<td>{{ pc.brand }}</td>
+						<td>{{ pc.model }}</td>
+						<td>{{ pc.serialNum }}</td>
+						<td>{{ pc.ref }}</td>
+						<td>{{ pc.inventory }}</td>
+						<td>{{ pc.roseta }}</td>
+						<td>{{ pc.ip }}</td>
+						<td>{{ pc.ethernet }}</td>
+						<td>{{ pc.datePurchase|date("d/m/Y") }}</td>
+					</tr>
+                {#% endif %#}
+            {% endfor %}
+
+            {% for microphone in room.microphones %}
+                {#% if pc.type == 1 %#}
+				<tr>
+					<td>{{ microphone.id }}</td>
+                    {#<td>{{ microphone.room.id }}</td>#}
+					<td><a href="{{ path('room_view', {'id': microphone.room.id}) }}" title="Historial del {{ microphone.room.room_name }}">{{ microphone.room.room_name }}</a></td>
+					<td>{#% if microphone.type == 1 %#}Micrófono {#% endif %#}</td>
+					<td>{{ microphone.brand }}</td>
+					<td>{{ microphone.model }}</td>
+					<td>{{ microphone.serialNum }}</td>
+					<td>{{ microphone.ref }}</td>
+					<td>{{ microphone.inventory }}</td>
+					<td>{{ microphone.roseta }}</td>
+					<td>{{ microphone.ip }}</td>
+					<td>{{ microphone.ethernet }}</td>
+					<td>{{ microphone.datePurchase|date("d/m/Y") }}</td>
+				</tr>
+                {#% endif %#}
+            {% endfor %}
+
+			</tbody>
+		</table>
+        {#% include "pagination.html.twig" %#}
+	</div>
+	<div role="tabpanel" class="tab-pane" id="issues" style="padding-top: 20px">
+
+	  	<table class="table table-striped">
+            <tr>
+				<td>ID</td>
+				<td>Incidencia</td>
+				<td>Notificado</td>
+				<td>Por</td>
+				<td>Estado</td>
+			</tr>
+			{% for issue in room.issues %}
+				<tr>
+					<td><a href="{{ path('issue_view', {'id': issue.id}) }}">{{ issue.id }}</a>
+					<span class="badge badge-primary">{{ issue.encryptedId }}</span>
+					<a href="{{ path('room_view', {'id': issue.room.id}) }}" title="Incidencias del {{ issue.room.room_name }}">{{ issue.room.room_name }}</a></td>
+					<td><a href="{{ path('issue_view', {'id': issue.encryptedId}) }}" title="Detalles de la incidencia {{ issue.encryptedId }}">{{ issue.description }}</a></td>
+					<td>{{ issue.dateNotification|date("d/m/Y") }}</td>
+					<td><a href="{{ path('person_view', {'id': issue.user_id}) }}" title="Incidencias del usuario {{ issue.user_id }}">{{ issue.user.firstName }} {{ issue.user.lastName }}</a></td>
+					<td>{% if issue.state_id == 4 %}
+							<i class="fa fa-check-circle text-green"></i> Resuelto {{ issue.dateResolution|date("d/m/Y") }}
+                        {% else %}
+							<i class="fa fa-close text-red"></i> En proceso
+                        {% endif %}</td>
+				</tr>
+            {% endfor %}
+		</table>
+        {#% include "pagination.html.twig" %#}
+	</div>
+	<div role="tabpanel" class="tab-pane" id="others" style="padding-top: 20px">
+
+	</div>
+
         
 {% endblock %}

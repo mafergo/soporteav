@@ -54,18 +54,6 @@
             <li><a href="#">Comprobar estado de las aulas</a></li-->
           </ul>
         </li>
-        <li class="{% if active in rooms_actives %}active {% endif %}treeview">
-          <a href="#"><i class="fa fa-graduation-cap" aria-hidden="true"></i> <span>Aulas</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li{% if 'rooms' == active %} class="active"{% endif %}><a href="{{ path('rooms') }}">Listar aulas.</a></li>
-            <li{% if 'room_prepare' == active %} class="active"{% endif %}><a href="{{ path('room_prepare') }}">Preparar aulas.</a></li>
-            <li{% if 'room_revise' == active %} class="active"{% endif %}><a href="{{ path('room_revise') }}">Revisar aulas.</a></li>
-          </ul>
-        </li>
 
         <li class="{% if active in centers_actives %}active {% endif %}treeview">
           <a href="#"><i class="fa fa-university" aria-hidden="true"></i> <span>Centros</span>
@@ -77,6 +65,19 @@
             <li{% if 'centers' == active %} class="active"{% endif %}><a href="{{ path('centers') }}">Listar Centros.</a></li>
             <li{% if 'centers_add' == active %} class="active"{% endif %}><a href="{{ path('centers') }}">Añadir Centro.</a></li>
             <li{% if 'unittechs' == active %} class="active"{% endif %}><a href="{{ path('unittechs') }}">Listar Unidades.</a></li>
+          </ul>
+        </li>
+
+        <li class="{% if active in rooms_actives %}active {% endif %}treeview">
+          <a href="#"><i class="fa fa-graduation-cap" aria-hidden="true"></i> <span>Aulas</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li{% if 'rooms' == active %} class="active"{% endif %}><a href="{{ path('rooms') }}">Listar aulas.</a></li>
+            <li{% if 'room_prepare' == active %} class="active"{% endif %}><a href="{{ path('room_prepare') }}">Preparar aulas.</a></li>
+            <li{% if 'room_revise' == active %} class="active"{% endif %}><a href="{{ path('room_revise') }}">Revisar aulas.</a></li>
           </ul>
         </li>
 

@@ -18,10 +18,27 @@ class Room
     private $id;
 
     /**
+     * @ManyToOne(targetEntity="\US\Soporteav\Entity\Area", inversedBy="rooms")
+     * @var Area
+     */
+    private $area;
+
+    /**
      * @Column(type="integer")
      * @var integer
      */
     private $area_id;
+
+    /**
+     * @ManyToMany(targetEntity="\US\Soporteav\Entity\Center", inversedBy="rooms")
+     * @JoinTable(name="room_center")
+     *
+     *
+     *     joinColumns={@JoinColumn(name="room_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="center_id", referencedColumnName="id")}
+     *
+     */
+    private $centers;
 
     /**
      * @Column(type="integer")
@@ -77,23 +94,10 @@ class Room
      */
     private $pcs;
 
-    /**
-     * @ManyToOne(targetEntity="\US\Soporteav\Entity\Area", inversedBy="rooms")
-     * @var Area
-     */
-    private $area;
 
 
-    /**
-     * @ManyToMany(targetEntity="\US\Soporteav\Entity\Center", inversedBy="rooms")
-     * @JoinTable(name="room_center")
-     *
-     *
-     *     joinColumns={@JoinColumn(name="room_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@JoinColumn(name="center_id", referencedColumnName="id")}
-     *
-     */
-    private $centers;
+
+
 
 
     

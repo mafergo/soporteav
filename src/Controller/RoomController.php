@@ -59,6 +59,30 @@ class RoomController
     }
 
     /**
+     * function indexAction
+     * @param Application $app
+     * @param $page
+     * @param $limit
+     * @return Response
+     */
+    public function prepareAction(Application $app)
+    {
+        $criteria = array();
+        $orderBy = array();
+        // Paginación
+        //$currentPage = $page;
+        $total = $this->roomRepository->count();
+        //$numPages = ceil($total / $limit);
+
+        $rooms = $this->roomRepository->findBy($criteria, $orderBy);
+        //var_dump($rooms);
+        return $app['twig']->render('room/room_prepare.html.twig', array(
+            'rooms' => $rooms,
+            'url' => $app['url_generator']->generate('rooms'),
+        ));
+    }
+
+    /**
      * @param Application $app
      * @param $id
      * @return Response/RedirectResponse
@@ -152,7 +176,7 @@ class RoomController
      */
     public function editAction(Application $app, $id)
     {
-        /** @var Penter $room */
+        /** @var enter $room */
         $room = $this->roomRepository->find($id);
         if ($room) {
             $response = $app['twig']->render('room/room_edit.html.twig', array(

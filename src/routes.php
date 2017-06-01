@@ -21,63 +21,34 @@ $app->get('/', function () use ($app) {
     return $app['twig']->render('index.html.twig', array());
 })->bind('homepage');
 
-/*
-$app->get('/novedades', 'No hay novedades')
-    ->bind('news');
-*/
-
-// Páginas varias (probablemente habrá que trasladarlas a admin)
-
-
+// Accesibilidad
 $app->get('/accesibilidad', function (Request $request) use ($app) {
     return $app['twig']->render('accesibilidad.html.twig', array());
 })->bind('accesibilidad');
-/*
-    //Novedades
-$app->get('/novedades', function () use ($app) {
-    return $app['twig']->render('new/new_index.html.twig', array());
-})->bind('news');
-*/
-$app->get('/noticia_nueva', function () use ($app) {
-    return $app['twig']->render('notice/notice_add.html.twig', array());
-})->bind('notice_add');
-/*
-// Incidencias
-$app->get('/incidencias', function () use ($app) {
-    return $app['twig']->render('incident/incident.html.twig', array());
-})->bind('incidents');
-*/
 
-/*
-$app->get('/aulas', function () use ($app) {
-    return $app['twig']->render('room/room_index.html.twig', array());
-})->bind('rooms');
-*/
-$app->get('/aula', function () use ($app) {
-    return $app['twig']->render('room/room_view.html.twig', array());
-})->bind('room_view');
+// Aulas
+$app->get('/aulas/{page}/{limit}', 'controller.room:indexAction')
+    ->value('page', '1')
+    ->value('limit', '10')
+    ->assert('page', '\d+')
+    ->assert('limit', '\d+')
+    ->bind('rooms');
 
-$app->get('/aula_preparar', function () use ($app) {
-    return $app['twig']->render('room/room_prepare.html.twig', array());
-})->bind('room_prepare');
+$app->get('/aula/{id}', 'controller.room:viewAction')
+    ->assert('id', '\d+')
+    ->bind('room_view');
+
+$app->get('/aula_preparar', 'controller.room:prepareAction')
+    ->bind('room_prepare');
 
 $app->get('/aulas_revisar', function () use ($app) {
     return $app['twig']->render('room/room_revise.html.twig', array());
 })->bind('room_revise');
 
-$app->get('/pcs', function () use ($app) {
-    return $app['twig']->render('pc/pc_index.html.twig', array());
-})->bind('pcs');
+$app->get('/select_aulas/{center_id}', 'controller.issue:selectRoomsAction')
+->bind('select_rooms');
 
-$app->get('/microfonos', function () use ($app) {
-    return $app['twig']->render('microphone/microphone_index.html.twig', array());
-})->bind('microphones');
-
-$app->get('/equipamiento', function () use ($app) {
-    return $app['twig']->render('equipment/equipment_index.html.twig', array());
-})->bind('equipment');
-
-// Probamos con Centros
+// Centros
 $app->get('/centros/{page}/{limit}', 'controller.center:indexAction')
     ->value('page', '1')
     ->value('limit', '10')
@@ -87,8 +58,18 @@ $app->get('/centros/{page}/{limit}', 'controller.center:indexAction')
 
 $app->get('/centro_nuevo', function () use ($app) {
     return $app['twig']->render('center/center_add.html.twig', array());
-})->bind('center_add'); 
+})->bind('center_add');
 
+$app->get('/centro/{id}', 'controller.center:viewAction')
+    ->assert('id', '\d+')
+    ->bind('center_view');
+
+// Equipamiento
+$app->get('/equipamiento', function () use ($app) {
+    return $app['twig']->render('equipment/equipment_index.html.twig', array());
+})->bind('equipment');
+
+// Incidencias
 $app->get('/incidencias/{page}/{limit}', 'controller.issue:indexAction')
     ->value('page', '1')
     ->value('limit', '10')
@@ -101,9 +82,24 @@ $app->get('/incidencia/{id}', 'controller.issue:viewAction')
     ->bind('issue_view');
 
 // Incidencias nuevas
-$app->get('/incidencia_nueva', function () use ($app) {
-    return $app['twig']->render('issue/issue_add.html.twig', array());
-})->bind('issue_add');
+$app->get('/incidencia_nueva', 'controller.issue:addAction')->bind('issue_add');
+
+$app->get('/pcs', function () use ($app) {
+    return $app['twig']->render('pc/pc_index.html.twig', array());
+})->bind('pcs');
+
+// Login
+$app->get('/login', function (Request $request) use ($app) {
+    return $app['twig']->render('login.html.twig', array(
+        'error' => $app['security.last_error']($request),
+        'last_username' => $app['session']->get('_security.last_username'),
+    ));
+})->bind('login');
+
+// Micrófonos
+$app->get('/microfonos', function () use ($app) {
+    return $app['twig']->render('microphone/microphone_index.html.twig', array());
+})->bind('microphones');
 
 $app->get('/microfonos/{page}/{limit}', 'controller.microphone:indexAction')
     ->value('page', '1')
@@ -112,6 +108,7 @@ $app->get('/microfonos/{page}/{limit}', 'controller.microphone:indexAction')
     ->assert('limit', '\d+')
     ->bind('microphones');
 
+// Novedades
 $app->get('/novedades/{page}/{limit}', 'controller.notice:indexAction')
     ->value('page', '1')
     ->value('limit', '10')
@@ -119,6 +116,18 @@ $app->get('/novedades/{page}/{limit}', 'controller.notice:indexAction')
     ->assert('limit', '\d+')
     ->bind('notices');
 
+$app->get('/noticia_nueva', function () use ($app) {
+    return $app['twig']->render('notice/notice_add.html.twig', array());
+})->bind('notice_add');
+
+$app->get('/ordenadores/{page}/{limit}', 'controller.pc:indexAction')
+    ->value('page', '1')
+    ->value('limit', '10')
+    ->assert('page', '\d+')
+    ->assert('limit', '\d+')
+    ->bind('pcs');
+
+// Personas
 $app->get('/personas/{page}/{limit}', 'controller.person:indexAction')
     ->value('page', '1')
     ->value('limit', '10')
@@ -134,20 +143,7 @@ $app->get('/persona_nueva', function () use ($app) {
     return $app['twig']->render('person/person_add.html.twig', array());
 })->bind('people_add');
 
-$app->get('/aulas/{page}/{limit}', 'controller.room:indexAction')
-    ->value('page', '1')
-    ->value('limit', '10')
-    ->assert('page', '\d+')
-    ->assert('limit', '\d+')
-    ->bind('rooms');
-
-$app->get('/ordenadores/{page}/{limit}', 'controller.pc:indexAction')
-    ->value('page', '1')
-    ->value('limit', '10')
-    ->assert('page', '\d+')
-    ->assert('limit', '\d+')
-    ->bind('pcs');
-
+// Proyectores
 $app->get('/proyectores/{page}/{limit}', 'controller.projector:indexAction')
     ->value('page', '1')
     ->value('limit', '10')
@@ -155,6 +151,7 @@ $app->get('/proyectores/{page}/{limit}', 'controller.projector:indexAction')
     ->assert('limit', '\d+')
     ->bind('projectors');
 
+// Unidades
 $app->get('/unidades/{page}/{limit}', 'controller.unittech:indexAction')
     ->value('page', '1')
     ->value('limit', '10')
@@ -170,15 +167,7 @@ $app->get('/private_upload/{item_id}/{path}', function ($item_id, $path) use ($a
 })
     ->assert('item', 'd+');
 
-//$app->get('/login', 'controller.login:loginAction')
-//    ->bind('login');
 
-$app->get('/login', function (Request $request) use ($app) {
-    return $app['twig']->render('login.html.twig', array(
-        'error' => $app['security.last_error']($request),
-        'last_username' => $app['session']->get('_security.last_username'),
-    ));
-})->bind('login');
 
 
 

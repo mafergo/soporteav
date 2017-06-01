@@ -35,7 +35,7 @@ use US\Soporteav\Repository\ProjectorRepository;
 use US\Soporteav\Controller\RoomController;
 use US\Soporteav\Repository\RoomRepository;
 
-// Room
+// Unittech
 use US\Soporteav\Controller\UnittechController;
 use US\Soporteav\Repository\UnittechRepository;
 

@@ -103,6 +103,14 @@ class Center
     }
 
     /**
+     * @return Room[]
+     */
+    public function getRooms()
+    {
+        return $this->rooms;
+    }
+
+    /**
      * @return string
      */
     public function getShortName()

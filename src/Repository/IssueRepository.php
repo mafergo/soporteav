@@ -52,7 +52,7 @@ class IssueRepository extends EntityRepository
 
 
     /**
-     * @param Center $center
+     * @param Issue $issue
      */
     public function delete(Issue $issue)
     {
@@ -61,7 +61,7 @@ class IssueRepository extends EntityRepository
     }
 
     /**
-     * Cuenta el número de Centros existente.
+     * Cuenta el número de Incidencias existente.
      *
      * @return integer Número total de Centros.
      */

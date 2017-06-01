@@ -1,0 +1,13 @@
+<label for="room">{{ 'room'|trans }}</label>
+<div class="controls">
+    {% if rooms is defined %}
+        <select id="room" name="room"  class="form-control placeholder" required>
+            <option value="" name="room">Seleccione un espacio. <i class="fa fa-sort"></i></option>
+            {% for room in rooms %}
+                <option value="{{ room.id }}" name="room">{{ room.room_name }}</option>
+            {% endfor %}
+        </select>
+    {% else %}
+        {{ "Not rooms defined yet"|trans }}
+    {% endif %}
+</div>
