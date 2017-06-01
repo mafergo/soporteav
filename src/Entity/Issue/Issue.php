@@ -2,6 +2,7 @@
 
 namespace US\Soporteav\Entity\Issue;
 
+use US\Soporteav\Entity\Person;
 use US\Soporteav\Entity\Room;
 
 /**
@@ -26,13 +27,13 @@ class Issue
 
     /**
      * @Column(type="datetime")
-     * @var datetime
+     * @var \DateTime
      */
     private $dateNotification;
 
     /**
      * @Column(type="datetime")
-     * @var datetime
+     * @var \DateTime
      */
     private $dateResolution;
 
@@ -56,15 +57,10 @@ class Issue
     
     /**
      * @Column(type="integer")
-     * @var int
+     * @var State
      */
-    private $state_id;
+    private $state;
 
-    /**
-     * @Column(type="integer")
-     * @var int
-     */
-    private $user_id;
 
     /**
      * @ManyToOne(targetEntity="\US\Soporteav\Entity\Person", inversedBy="issues")
@@ -78,15 +74,6 @@ class Issue
      */
     function __construct($data)
     {
-        $this->encryptedId = $data['encryptedId'];
-        $this->room = $data['room'];
-        $this->description = $data['description'];
-        $this->dateNotification = $data['dateNotification'];
-        $this->dateResolution = $data['dateResolution'];
-        $this->estado = $data['estado_id'];
-        $this->category = $data['category'];
-        $this->user_id = $data['user_id'];
-        $this->user = $data['user'];
     }
 
     /**
@@ -111,6 +98,22 @@ class Issue
     public function setEncryptedId($encryptedId)
     {
         $this->encryptedId = $encryptedId;
+    }
+
+    /**
+     * @return State
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * @param State $state
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
     }
 
     /**
@@ -146,7 +149,7 @@ class Issue
     }
 
     /**
-     * @return datetime
+     * @return \DateTime
      */
     public function getDateNotification()
     {
@@ -154,7 +157,7 @@ class Issue
     }
 
     /**
-     * @param datetime $dateNotification
+     * @param \DateTime $dateNotification
      */
     public function setDateNotification($dateNotification)
     {
@@ -162,7 +165,7 @@ class Issue
     }
 
     /**
-     * @return datetime
+     * @return \DateTime
      */
     public function getDateResolution()
     {
@@ -170,27 +173,11 @@ class Issue
     }
 
     /**
-     * @param datetime $dateResolution
+     * @param \DateTime $dateResolution
      */
     public function setDateResolution($dateResolution)
     {
         $this->dateResolution = $dateResolution;
-    }
-
-    /**
-     * @return int
-     */
-    public function getState_id()
-    {
-        return $this->state_id;
-    }
-
-    /**
-     * @param int $state_id
-     */
-    public function setState_id($state_id)
-    {
-        $this->state_id = $state_id;
     }
 
     /**
@@ -210,23 +197,7 @@ class Issue
     }
 
     /**
-     * @return int
-     */
-    public function getUser_id()
-    {
-        return $this->user_id;
-    }
-
-    /**
-     * @param int $user_id
-     */
-    public function setUser_id($user_id)
-    {
-        $this->user_id = $user_id;
-    }
-
-    /**
-     * @return int
+     * @return Person
      */
     public function getUser()
     {
