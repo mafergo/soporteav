@@ -1,6 +1,7 @@
 .idea/
 config/dev.php
 config/prod.php
+prueba*
 var/*
 vendor/*
 web/upload/*
