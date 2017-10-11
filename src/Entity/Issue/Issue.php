@@ -56,7 +56,7 @@ class Issue
     private $room;
     
     /**
-     * @Column(type="integer")
+     * @ManyToOne(targetEntity="\US\Soporteav\Entity\Issue\State", inversedBy="issues")
      * @var State
      */
     private $state;
@@ -74,6 +74,9 @@ class Issue
      */
     function __construct($data)
     {
+        foreach ($data as $key => $value) {
+            $this->$key = $value;
+        }
     }
 
     /**

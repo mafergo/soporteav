@@ -12,6 +12,7 @@ use US\Soporteav\Repository\CenterRepository;
 use US\Soporteav\Controller\IssueController;
 use US\Soporteav\Repository\IssueRepository;
 use US\Soporteav\Repository\IssueCategoryRepository;
+use US\Soporteav\Repository\IssueStateRepository;
 use US\Soporteav\Controller\MicrophoneController;
 use US\Soporteav\Repository\MicrophoneRepository;
 use US\Soporteav\Controller\NoticeController;
@@ -121,6 +122,10 @@ $app['repository.issue'] = function ($app) {
 
 $app['repository.issueCategory'] = function ($app) {
     return new IssueCategoryRepository($app['orm.em'], $app['orm.em']->getClassMetadata('US\Soporteav\Entity\Issue\Category'));
+};
+
+$app['repository.issueState'] = function ($app) {
+    return new IssueStateRepository($app['orm.em'], $app['orm.em']->getClassMetadata('US\Soporteav\Entity\Issue\State'));
 };
 
 // Register repositories as Silex services

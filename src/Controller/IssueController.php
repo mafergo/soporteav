@@ -99,23 +99,29 @@ class IssueController
      */
     public function saveAction(Request $request, Application $app)
     {
-        dump($request);
-        $data['encryptedId'] = $request->get('encryptedId');
+        //dump($request);
+        //$data['encryptedId'] = $request->get('encryptedId');
+        $data['encryptedId'] = '222';
         $data['description'] = $request->get('description');
-        //$data['room_id'] = $request->get('room_id');
+        $data['room_id'] = $request->get('room_id');
         $data['room'] = $app['repository.room']->find($request->get('room_id'));
+        $data['category_id'] = $request->get('category_id');
+        $data['category'] = $app['repository.issueCategory']->find($request->get('category_id'));
 
-        $data['dateNotification'] = $request->get('dateNotification');
+       //$data['dateNotification'] = $request->get('dateNotification');
 
         if ($data['id'] = $request->get('id')) {
             /** @var Issue\Issue $issue */
             $issue = $this->issueRepository->find($data['id']);
             $issue->setDescription($data['description']);
             $issue->setRoom($data["room"]);
+            $issue->setEncryptedId($data['encryptedId']);
             $message = "Issue data has been updated"; // in case of success
             $redirect = $app['url_generator']->generate('edit', $data); // in case of failure
 
         } else {
+            $state_id = 1;
+            $data['state'] = $app['repository.issueState']->find($state_id);
             $data['startDate'] = new \DateTime();
             $issue = new Issue\Issue($data);
             $message = "Issue has been created"; // in case of success

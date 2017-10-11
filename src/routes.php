@@ -86,7 +86,7 @@ $app->post('/incidencia/grabar', 'controller.issue:saveAction')
     ->bind('issue_save');
 
 // Incidencias nuevas
-$app->get('/incidencia_nueva', 'controller.issue:addAction')
+$app->get('/incidencia/nueva', 'controller.issue:addAction')
     ->bind('issue_add');
 
 $app->get('/pcs', function () use ($app) {

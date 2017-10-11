@@ -3,7 +3,7 @@
 {% set title = 'Add Issue'|trans %}
 
 {# Para probar y luego borrar #}
-{% set categoryNews = [{'id': 1, 'name': 'Aulas'}, {'id': 2, 'name': 'Eventos'}] %}
+{% set categoryNews = [{'id': 1, 'name': 'Incidencias'}, {'id': 2, 'name': 'Recordatorios'}, {'id': 3, 'name': 'Tareas'}] %}
 
 
 {% block content %}
@@ -11,12 +11,12 @@
         <div class="col-lg-12">
             <h2>{{ title }}</h2>
 
-            <form action="{#{ path('person_save') }#}" method="post"  enctype='multipart/form-data'>
+            <form action="{{ path('issue_save') }}" method="post"  enctype='multipart/form-data'>
                 <div class="form-group">
                     <label for="category">{{ 'Category'|trans }}</label>
                     <div class="controls">
 					<select id="category" name="category"  class="form-control placeholder" required>
-						<option value="" name="category">Seleccione una categoria. <i class="fa fa-sort"></i></option>
+						<!--option value="" name="category">Seleccione una categoria. <i class="fa fa-sort"></i></option-->
 					{% for category in categoryNews %}
 						<option value="{{ category.id }}" name="category">{{ category.name }}</option>
 					{% endfor %}

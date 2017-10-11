@@ -55,3 +55,7 @@ body {
   background-color: transparent;
   margin-top: -50px;
 }
+.btn {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}

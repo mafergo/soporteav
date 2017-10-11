@@ -102,10 +102,10 @@
 				<div class="form-group">
 				<label for="category">{{ 'Category'|trans }}</label>
 				<div class="controls">
-					<select id="category" name="category"  class="form-control placeholder" required>
-						<option value="" name="category">Seleccione una categoria. <i class="fa fa-sort"></i></option>
+					<select id="category" name="category_id"  class="form-control placeholder" required>
+						<option value="">Seleccione una categoria. <i class="fa fa-sort"></i></option>
                         {% for category in issueCategories %}
-							<option value="{{ category.id }}" name="category">{{ category.name }}</option>
+							<option value="{{ category.id }}" >{{ category.name }}</option>
                         {% endfor %}
 					</select>
 				</div>
